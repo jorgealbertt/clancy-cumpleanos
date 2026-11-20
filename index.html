@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#11100f">
+    <meta name="description" content="Una edición de cumpleaños hecha con cariño, recuerdos y música para ti.">
+    <meta property="og:title" content="Clancy — edición de cumpleaños">
+    <meta property="og:description" content="Un pequeño archivo de recuerdos para celebrar tu día.">
+    <meta property="og:type" content="website">
+    <title>Clancy — edición de cumpleaños</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <style>
+      :root {
+        color-scheme: dark;
+        --ink: #f7f1e7;
+        --muted: #b7afa2;
+        --night: #11100f;
+        --panel: #1b1917;
+        --line: #39332e;
+        --red: #ef574d;
+        --red-dark: #702d29;
+        --gold: #f0c66c;
+        --green: #94a98b;
+        --serif: Georgia, "Times New Roman", serif;
+        --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: var(--night);
+        color: var(--ink);
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+      }
+
+      *, *::before, *::after { box-sizing: border-box; }
+      body {
+        min-width: 320px;
+        margin: 0;
+        background:
+          radial-gradient(ellipse at 16% 5%, rgb(112 45 41 / 26%), transparent 36rem),
+          radial-gradient(ellipse at 90% 33%, rgb(240 198 108 / 8%), transparent 30rem),
+          var(--night);
+        line-height: 1.6;
+      }
+      button, input { font: inherit; }
+      button, a { -webkit-tap-highlight-color: transparent; }
+      a { color: inherit; }
+      a:focus-visible, button:focus-visible, input:focus-visible {
+        outline: 3px solid var(--gold);
+        outline-offset: 3px;
+      }
+      .skip-link {
+        position: fixed;
+        z-index: 10;
+        top: 1rem;
+        left: 1rem;
+        transform: translateY(-160%);
+        padding: .6rem 1rem;
+        border-radius: .5rem;
+        background: var(--ink);
+        color: var(--night);
+      }
+      .skip-link:focus { transform: translateY(0); }
+      .shell { width: min(100% - 2rem, 1020px); margin-inline: auto; }
+      .tape { height: 5px; background: repeating-linear-gradient(135deg, var(--red) 0 9px, var(--night) 9px 18px); }
+      .topbar { border-bottom: 1px solid rgb(239 87 77 / 24%); }
+      .topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 76px; }
+      .brand { display: flex; align-items: center; gap: .8rem; text-decoration: none; }
+      .brand-mark {
+        display: grid;
+        width: 42px;
+        aspect-ratio: 1;
+        place-items: center;
+        border: 1px solid var(--gold);
+        border-radius: 50%;
+        background: var(--red-dark);
+        color: var(--gold);
+        font: 700 .9rem var(--mono);
+        letter-spacing: -.12em;
+      }
+      .brand-name { display: block; font-size: .92rem; font-weight: 750; letter-spacing: .17em; }
+      .brand-caption, .edition-tag, .eyebrow { font: .68rem var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+      .brand-caption { color: var(--muted); }
+      .edition-tag { padding: .4rem .65rem; border: 1px solid rgb(240 198 108 / 34%); border-radius: 999px; color: var(--gold); white-space: nowrap; }
+      main { padding-block: clamp(2.5rem, 7vw, 5.5rem) 4rem; }
+      .hero {
+        position: relative;
+        overflow: hidden;
+        padding: clamp(1.5rem, 5vw, 3.25rem);
+        border: 1px solid var(--line);
+        border-radius: 1.5rem;
+        background: linear-gradient(115deg, rgb(112 45 41 / 24%), transparent 62%), var(--panel);
+        box-shadow: 0 28px 80px rgb(0 0 0 / 28%);
+      }
+      .hero::after {
+        position: absolute;
+        top: -4rem;
+        right: -3rem;
+        width: 16rem;
+        aspect-ratio: 1;
+        border: 1px solid rgb(240 198 108 / 12%);
+        border-radius: 50%;
+        box-shadow: 0 0 0 2rem rgb(240 198 108 / 2%), 0 0 0 4rem rgb(240 198 108 / 2%);
+        content: "";
+        pointer-events: none;
+      }
+      .eyebrow { margin: 0 0 .65rem; color: var(--gold); }
+      h1, h2, h3, p { margin-top: 0; }
+      h1, h2, h3 { line-height: 1.15; }
+      h1 { max-width: 15ch; margin-bottom: 1rem; font: 600 clamp(2.65rem, 8vw, 5.6rem)/.98 var(--serif); letter-spacing: -.045em; }
+      .hero-copy { max-width: 55ch; margin-bottom: 1.6rem; color: #ddd4c8; font-size: clamp(1rem, 2vw, 1.12rem); }
+      .hero-date {
+        display: inline-flex;
+        align-items: center;
+        gap: .55rem;
+        padding: .55rem .8rem;
+        border: 1px solid rgb(240 198 108 / 30%);
+        border-radius: .6rem;
+        background: rgb(17 16 15 / 46%);
+        color: var(--gold);
+        font: .76rem var(--mono);
+      }
+      .hero-date span { color: var(--muted); }
+      .section { margin-top: clamp(2.5rem, 6vw, 4.5rem); }
+      .section-heading { max-width: 620px; margin-bottom: 1.3rem; }
+      .section-heading h2 { margin-bottom: .55rem; font: 600 clamp(1.8rem, 4vw, 2.7rem)/1.08 var(--serif); letter-spacing: -.025em; }
+      .section-heading p { margin-bottom: 0; color: var(--muted); }
+      .clues { display: grid; gap: .85rem; }
+      .clue { padding: 1.15rem; border: 1px solid var(--line); border-radius: .9rem; background: rgb(27 25 23 / 82%); }
+      .clue-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: .45rem; }
+      .clue-label { color: var(--red); font: .68rem var(--mono); letter-spacing: .09em; text-transform: uppercase; }
+      .clue-status { color: var(--muted); font: .65rem var(--mono); white-space: nowrap; }
+      .clue-status.solved { color: var(--green); }
+      .clue label { display: block; margin-bottom: .7rem; font-weight: 550; }
+      .answer-row { display: flex; gap: .6rem; }
+      .answer-row input {
+        min-width: 0;
+        flex: 1;
+        padding: .72rem .8rem;
+        border: 1px solid #554b42;
+        border-radius: .6rem;
+        background: #11100f;
+        color: var(--ink);
+      }
+      .answer-row input::placeholder { color: #8e857b; }
+      .button {
+        display: inline-flex;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
+        gap: .5rem;
+        padding: .72rem 1rem;
+        border: 1px solid transparent;
+        border-radius: .65rem;
+        background: var(--red);
+        color: #160f0e;
+        cursor: pointer;
+        font-size: .86rem;
+        font-weight: 750;
+        text-decoration: none;
+        transition: background-color .18s ease, transform .18s ease, border-color .18s ease;
+      }
+      .button:hover { transform: translateY(-1px); background: #ff7468; }
+      .button:disabled { border-color: rgb(148 169 139 / 42%); background: #2b382c; color: #d7e1d3; cursor: default; transform: none; }
+      .hint { min-height: 1.25em; margin: .55rem 0 0; color: var(--gold); font-size: .8rem; }
+      .progress-wrap { margin-top: 1.1rem; }
+      .progress-label { display: flex; justify-content: space-between; gap: 1rem; margin-bottom: .4rem; color: var(--muted); font: .7rem var(--mono); }
+      progress { display: block; width: 100%; height: 8px; overflow: hidden; border: 0; border-radius: 999px; background: #24211e; }
+      progress::-webkit-progress-bar { border-radius: 999px; background: #24211e; }
+      progress::-webkit-progress-value { border-radius: 999px; background: linear-gradient(90deg, var(--red), var(--gold)); transition: width .3s ease; }
+      progress::-moz-progress-bar { border-radius: 999px; background: linear-gradient(90deg, var(--red), var(--gold)); }
+      .reveal { margin-top: 1rem; padding: 1.2rem; border: 1px solid rgb(240 198 108 / 40%); border-radius: 1rem; background: linear-gradient(120deg, rgb(112 45 41 / 30%), rgb(240 198 108 / 7%)); text-align: center; }
+      .reveal p { margin-bottom: .8rem; color: var(--gold); font: .68rem var(--mono); letter-spacing: .12em; }
+      .reveal h3 { margin-bottom: 1rem; font-size: 1.2rem; }
+      .button-gold { background: var(--gold); }
+      .button-gold:hover { background: #ffdb8d; }
+      .letter-card { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); overflow: hidden; border: 1px solid var(--line); border-radius: 1.25rem; background: var(--panel); box-shadow: 0 22px 65px rgb(0 0 0 / 22%); }
+      .letter-art {
+        display: flex;
+        min-height: 260px;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1.5rem;
+        background: linear-gradient(180deg, rgb(17 16 15 / 5%), rgb(17 16 15 / 76%)), radial-gradient(ellipse at 50% 30%, #a34a3d, #4a211f 55%, #1a1715 100%);
+      }
+      .art-date { align-self: flex-start; padding: .4rem .6rem; border: 1px solid rgb(240 198 108 / 45%); border-radius: 999px; color: var(--gold); font: .65rem var(--mono); }
+      .art-caption { margin: 0; color: #fff3dc; font: 600 clamp(1.7rem, 4vw, 2.4rem)/1.05 var(--serif); }
+      .letter-copy { padding: clamp(1.3rem, 4vw, 2.4rem); }
+      .letter-copy h2 { margin-bottom: 1rem; font: 600 clamp(1.8rem, 4vw, 2.5rem)/1.1 var(--serif); }
+      .letter-copy p { color: #ddd4c8; }
+      .letter-copy strong { color: var(--gold); }
+      .signature { display: flex; justify-content: space-between; gap: 1rem; margin: 1.3rem 0 0; padding-top: .9rem; border-top: 1px solid var(--line); color: var(--muted) !important; font: .68rem var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+      .signature span:last-child { color: var(--red); }
+      .music-note { padding: 1rem 1.1rem; border-left: 3px solid var(--gold); border-radius: 0 .6rem .6rem 0; background: rgb(240 198 108 / 7%); color: #ddd4c8; font-size: .9rem; }
+      .song-groups { display: grid; grid-template-columns: 1fr; gap: 1.3rem; }
+      .song-group { min-width: 0; padding: 1.2rem; border: 1px solid var(--line); border-radius: 1rem; background: rgb(27 25 23 / 82%); }
+      .song-group h3 { margin-bottom: .25rem; font: 600 1.35rem var(--serif); }
+      .group-intro { margin-bottom: 1rem; color: var(--muted); font-size: .82rem; }
+      .song-list { display: grid; gap: .7rem; }
+      .song-card { padding: .9rem; border: 1px solid #39332e; border-radius: .75rem; background: #171513; }
+      .song-title-row { display: flex; align-items: baseline; justify-content: space-between; gap: .75rem; }
+      .song-title { margin: 0; font-size: .98rem; font-weight: 700; }
+      .song-tag { color: var(--gold); font: .61rem var(--mono); letter-spacing: .08em; text-align: right; text-transform: uppercase; }
+      .song-artist { margin: .18rem 0 .5rem; color: var(--red); font-size: .76rem; }
+      .song-note { margin: 0; color: #d2c9bd; font-size: .81rem; }
+      .song-links { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; }
+      .song-links a { padding: .35rem .55rem; border: 1px solid #554b42; border-radius: .45rem; color: var(--ink); font-size: .72rem; text-decoration: none; }
+      .song-links a:hover { border-color: var(--gold); color: var(--gold); }
+      footer { padding-block: 1.25rem 2rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .75rem; text-align: center; }
+      [hidden] { display: none !important; }
+      @media (min-width: 720px) {
+        .clues { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .clue-head { align-items: flex-start; flex-direction: column; gap: .3rem; min-height: 2rem; }
+        .answer-row { align-items: stretch; flex-direction: column; }
+        .answer-row .button { width: 100%; }
+        .song-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+      @media (max-width: 620px) {
+        .brand-caption { display: none; }
+        .edition-tag { font-size: .58rem; }
+        .letter-card { grid-template-columns: 1fr; }
+        .letter-art { min-height: 190px; }
+      }
+      @media (max-width: 420px) {
+        .shell { width: min(100% - 1.2rem, 1020px); }
+        .topbar-inner { min-height: 68px; }
+        .answer-row { flex-direction: column; }
+        .answer-row .button { width: 100%; }
+        .song-title-row { align-items: flex-start; flex-direction: column; gap: .15rem; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+    <div class="tape" aria-hidden="true"></div>
+    <header class="topbar">
+      <div class="shell topbar-inner">
+        <a class="brand" href="#" aria-label="Clancy, edición de cumpleaños">
+          <span class="brand-mark" aria-hidden="true">| - /</span>
+          <span><span class="brand-name">CLANCY</span><span class="brand-caption">Un archivo hecho para ti</span></span>
+        </a>
+        <span class="edition-tag">Edición especial · 24.11</span>
+      </div>
+    </header>
+
+    <main id="main" class="shell">
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow">Señal recibida · edición de cumpleaños</p>
+        <h1 id="page-title">Un pequeño lugar solo nuestro.</h1>
+        <p class="hero-copy">Si llegaste hasta aquí, encontraste el regalo que preparé para ti: una historia, algunos recuerdos y la música que nos acompaña.</p>
+        <div class="hero-date"><span>PARA CELEBRAR</span> 24 DE NOVIEMBRE</div>
+      </section>
+
+      <section class="section" aria-labelledby="clues-title">
+        <div class="section-heading">
+          <p class="eyebrow">01 / Archivo personal</p>
+          <h2 id="clues-title">Tres recuerdos abren la caja.</h2>
+          <p>Responde con los detalles que solo tú conoces. No hay prisa: el regalo te espera.</p>
+        </div>
+        <div class="clues">
+          <form class="clue" data-clue="song">
+            <div class="clue-head"><span class="clue-label">Clave 01 · Nuestra canción</span><span class="clue-status" id="status-song">Pendiente</span></div>
+            <label for="answer-song">¿Cuál es esa canción que siempre enciende la chispa?</label>
+            <div class="answer-row"><input id="answer-song" name="answer" type="text" autocomplete="off" placeholder="Nombre de la canción" required><button class="button" type="submit">Comprobar</button></div>
+            <p class="hint" id="hint-song" aria-live="polite"></p>
+          </form>
+          <form class="clue" data-clue="kiss">
+            <div class="clue-head"><span class="clue-label">Clave 02 · El primer beso</span><span class="clue-status" id="status-kiss">Pendiente</span></div>
+            <label for="answer-kiss">¿Qué día y mes marcó el inicio de todo?</label>
+            <div class="answer-row"><input id="answer-kiss" name="answer" type="text" autocomplete="off" placeholder="Día y mes" required><button class="button" type="submit">Comprobar</button></div>
+            <p class="hint" id="hint-kiss" aria-live="polite"></p>
+          </form>
+          <form class="clue" data-clue="date">
+            <div class="clue-head"><span class="clue-label">Clave 03 · Nuestra primera cita</span><span class="clue-status" id="status-date">Pendiente</span></div>
+            <label for="answer-date">¿Qué día y mes tuvimos nuestra primera cita oficial?</label>
+            <div class="answer-row"><input id="answer-date" name="answer" type="text" autocomplete="off" placeholder="Día y mes" required><button class="button" type="submit">Comprobar</button></div>
+            <p class="hint" id="hint-date" aria-live="polite"></p>
+          </form>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>RECUERDOS ENCONTRADOS</span><span id="progress-count">0 / 3</span></div>
+          <progress id="progress" max="3" value="0" aria-label="Recuerdos encontrados">0 de 3</progress>
+        </div>
+        <div class="reveal" id="reveal" hidden>
+          <p>IDENTIDAD CONFIRMADA · REGALO DESBLOQUEADO</p>
+          <h3>Los muros se abren. Esta historia es tuya.</h3>
+          <button class="button button-gold" id="open-letter" type="button">Abrir tu carta <span aria-hidden="true">↓</span></button>
+        </div>
+      </section>
+
+      <section class="section" id="letter" aria-labelledby="letter-title" hidden>
+        <div class="letter-card">
+          <div class="letter-art" aria-hidden="true"><span class="art-date">28 MAR · 04 ABR · 24 NOV</span><p class="art-caption">Donde<br>empieza la luz.</p></div>
+          <div class="letter-copy">
+            <p class="eyebrow">02 / Para ti, en tu día</p>
+            <h2 id="letter-title" tabindex="-1">Feliz cumpleaños, mi vida.</h2>
+            <p>Hoy es <strong>24 de noviembre</strong>, y no sabes cuánto celebro tu vida. Quería darte el vinilo de <em>Clancy</em> en tus manos, pero mientras llega ese momento, quise construirte un rincón que fuera solo nuestro, hecho línea por línea pensando en ti.</p>
+            <p>Desde aquel <strong>28 de marzo</strong> en que nuestro primer beso detuvo el tiempo, y ese <strong>4 de abril</strong> en nuestra primera cita, algo cambió para siempre. A veces la vida pesa demasiado y la mente se vuelve un lugar oscuro, como los muros de Dema; pero quiero que nunca olvides que <strong>ya no tienes que caminar sola por ahí</strong>.</p>
+            <p>Cada canción que me has dedicado ha sido como una ventana abierta hacia tu corazón. Sentir que soy tu paz, tu lugar seguro y parte de tu sanación es el regalo más grande que la vida me ha dado. Mientras yo esté aquí, siempre habrá una antorcha encendida para recordarte lo valiosa, hermosa e irremplazable que eres.</p>
+            <p><strong>Gracias por quedarte, por sanar y por dejarme amarte.</strong> Feliz cumpleaños. Te quiero con todo mi corazón.</p>
+            <p class="signature"><span>Con todo mi amor</span><span>| - /</span></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="music" aria-labelledby="music-title" hidden>
+        <div class="section-heading">
+          <p class="eyebrow">03 / Nuestra banda sonora</p>
+          <h2 id="music-title">Canciones con historia.</h2>
+          <p>La música abre en Spotify o YouTube Music. No se carga audio hasta que tú eliges reproducirlo.</p>
+        </div>
+        <p class="music-note">Este regalo no aloja grabaciones: cada enlace te lleva a la búsqueda oficial del servicio que elijas.</p>
+        <div class="song-groups">
+          <section class="song-group" aria-labelledby="clancy-songs-title">
+            <h3 id="clancy-songs-title">Clancy · lado A / lado B</h3>
+            <p class="group-intro">Una edición especial para escuchar a tu manera.</p>
+            <div class="song-list" id="clancy-songs"></div>
+          </section>
+          <section class="song-group" aria-labelledby="dedicated-songs-title">
+            <h3 id="dedicated-songs-title">Las canciones que me dedicaste</h3>
+            <p class="group-intro">Pequeñas notas sobre lo que cada una significa para mí.</p>
+            <div class="song-list" id="dedicated-songs"></div>
+          </section>
+        </div>
+      </section>
+    </main>
+    <footer><div class="shell">Hecho con cariño, recuerdo a recuerdo. · 24 de noviembre</div></footer>
+
+    <script>
+      const clues = {
+        song: { matches: ["heavydirtysoul", "heavy dirty soul"], hint: "Pista: su título empieza con “Heavy”." },
+        kiss: { matches: ["28 de marzo", "28 marzo", "28/03", "28/3", "28-03", "28-3", "marzo 28"], hint: "Pista: fue a finales del tercer mes del año." },
+        date: { matches: ["4 de abril", "04 de abril", "4 abril", "04 abril", "4/04", "04/04", "4/4", "4-04", "04-04", "abril 4"], hint: "Pista: fue en los primeros días del cuarto mes del año." }
+      };
+
+      const clancySongs = [
+        ["Overcompensate", "CARA A", "Bienvenida a Clancy. Volvemos más fuertes; gracias por dejarme entrar en tu mundo y empezar esta historia juntos."],
+        ["Next Semester", "CARA A", "No importa lo difícil que haya sido el camino antes de encontrarnos: siempre hay un nuevo comienzo, y me hace inmensamente feliz caminar este contigo."],
+        ["Backslide", "CARA A", "En los días en que sientas que la marea sube o que las dudas regresan, recuerda que aquí estoy para sostenerte."],
+        ["Midwest Indigo", "CARA A", "Incluso en los días más fríos, tu risa tiene el poder de iluminarlo todo. Contigo cualquier lugar se siente como hogar."],
+        ["Routines in the Night", "CARA A", "Para esas noches largas en las que los pensamientos no se detienen: mi voz y mi abrazo siempre serán tu refugio hasta que amanezca."],
+        ["Vignette", "CARA A", "Cada recuerdo contigo es como una fotografía guardada bajo llave en mi mente. Desde el 28 de marzo hasta hoy, eres mi historia favorita."],
+        ["The Craving (Jenna's Version)", "CARA B", "La canción más dulce del álbum es para ti. Quererte se siente honesto, sencillo y verdadero."],
+        ["Lavish", "CARA B", "Te mereces lo mejor del mundo, celebrar a lo grande tu cumpleaños y sonreír sin preocupaciones."],
+        ["Navigating", "CARA B", "Aunque a veces sintamos que navegamos a ciegas entre la tormenta, mientras tenga tu mano nunca estaremos perdidos."],
+        ["Snap Back", "CARA B", "Sanar no es una línea recta, tiene altos y bajos; admiro con toda mi alma tu valentía para seguir levantándote."],
+        ["Oldies Station", "CARA B", "Quiero llegar contigo a viejitos, escuchar nuestras canciones de siempre y ver todo lo que superamos juntos."],
+        ["At the Risk of Feeling Dumb", "CARA B", "Nunca dudes en buscarme, hablarme o pedir ayuda cuando el día se ponga gris. Siempre voy a estar ahí para ti."],
+        ["Paladin Strait", "CARA B", "Cruzaría cualquier océano y escalaría cualquier muro por verte en paz. Feliz cumpleaños, mi Bandito favorita."]
+      ];
+
+      const dedicatedSongs = [
+        ["Heavydirtysoul", "Twenty One Pilots", "TU FAVORITA", "La chispa que lo empezó todo. Cada vez que suena siento tu energía y recuerdo por qué me enamoré de tu esencia."],
+        ["Smithereens", "Twenty One Pilots", "PROTECCIÓN", "Por ti me enfrentaría a cualquier gigante en este mundo. Si alguien intenta lastimarte, aquí estoy yo primero."],
+        ["Screen", "Twenty One Pilots", "TRANSPARENCIA", "Contigo no hacen falta pantallas ni máscaras; puedo ver tu corazón tal cual es, y es lo más hermoso que he conocido."],
+        ["Compass", "The Neighbourhood", "NUESTRO NORTE", "Cuando el mundo afuera parecía un caos sin rumbo, nos convertimos en la brújula el uno del otro para encontrar calma."],
+        ["Nervous", "The Neighbourhood", "28 DE MARZO", "Esa electricidad, las manos temblando y el corazón acelerado que todavía siento cada vez que te tengo cerca."],
+        ["Patadas de Ahogado", "LATIN MAFIA & Humbe", "RESPIRAR", "Cuando todo afuera pesaba demasiado y sentías que faltaba el aire, encontrarnos fue volver a respirar en paz."],
+        ["Fallingforyou", "The 1975", "PAZ", "Caer por ti no fue un accidente: fue encontrar por fin el lugar donde mi alma quería quedarse a vivir."]
+      ];
+
+      function normalize(value) {
+        return value.toLocaleLowerCase("es").normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, " ").trim();
+      }
+
+      const solved = new Set();
+      document.querySelectorAll(".clue").forEach((form) => {
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const key = form.dataset.clue;
+          if (solved.has(key)) return;
+          const input = form.elements.answer;
+          const answer = normalize(input.value);
+          const accepted = clues[key].matches.some((match) => normalize(match) === answer);
+          const hint = document.getElementById(`hint-${key}`);
+          const status = document.getElementById(`status-${key}`);
+
+          if (!accepted) {
+            hint.textContent = clues[key].hint;
+            status.textContent = "Inténtalo otra vez";
+            input.setAttribute("aria-invalid", "true");
+            input.focus();
+            return;
+          }
+
+          solved.add(key);
+          hint.textContent = "";
+          input.removeAttribute("aria-invalid");
+          input.disabled = true;
+          form.querySelector("button").disabled = true;
+          status.textContent = "Recuerdo encontrado";
+          status.classList.add("solved");
+          document.getElementById("progress").value = solved.size;
+          document.getElementById("progress-count").textContent = `${solved.size} / 3`;
+
+          if (solved.size === 3) {
+            document.getElementById("reveal").hidden = false;
+            document.getElementById("reveal").scrollIntoView({ behavior: "smooth", block: "nearest" });
+            document.getElementById("open-letter").focus({ preventScroll: true });
+          }
+        });
+      });
+
+      document.getElementById("open-letter").addEventListener("click", () => {
+        document.getElementById("letter").hidden = false;
+        document.getElementById("music").hidden = false;
+        document.getElementById("letter").scrollIntoView({ behavior: "smooth", block: "start" });
+        document.getElementById("letter-title").focus({ preventScroll: true });
+      });
+
+      function platformLink(service, title, artist) {
+        const query = encodeURIComponent(`${title} ${artist}`);
+        const link = document.createElement("a");
+        link.href = service === "spotify"
+          ? `https://open.spotify.com/search/${query}`
+          : `https://music.youtube.com/search?q=${query}`;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = service === "spotify" ? "Spotify ↗" : "YouTube Music ↗";
+        return link;
+      }
+
+      function addSongCard(container, { title, artist, tag, note, searchTitle = title, searchArtist = artist }) {
+        const card = document.createElement("article");
+        card.className = "song-card";
+        const heading = document.createElement("div");
+        heading.className = "song-title-row";
+        const name = document.createElement("h4");
+        name.className = "song-title";
+        name.textContent = title;
+        heading.append(name);
+
+        if (tag) {
+          const badge = document.createElement("span");
+          badge.className = "song-tag";
+          badge.textContent = tag;
+          heading.append(badge);
+        }
+
+        const artistLine = document.createElement("p");
+        artistLine.className = "song-artist";
+        artistLine.textContent = artist;
+        const noteLine = document.createElement("p");
+        noteLine.className = "song-note";
+        noteLine.textContent = note;
+        const links = document.createElement("div");
+        links.className = "song-links";
+        links.setAttribute("aria-label", `Escuchar ${title}`);
+        links.append(platformLink("spotify", searchTitle, searchArtist), platformLink("youtube", searchTitle, searchArtist));
+        card.append(heading, artistLine, noteLine, links);
+        container.append(card);
+      }
+
+      clancySongs.forEach(([title, side, note], index) => {
+        addSongCard(document.getElementById("clancy-songs"), {
+          title: `${String(index + 1).padStart(2, "0")}. ${title}`,
+          artist: `Twenty One Pilots · ${side}`,
+          note,
+          searchTitle: title,
+          searchArtist: "Twenty One Pilots"
+        });
+      });
+      dedicatedSongs.forEach(([title, artist, tag, note]) => {
+        addSongCard(document.getElementById("dedicated-songs"), { title, artist, tag, note });
+      });
+    </script>
+  </body>
+</html>
