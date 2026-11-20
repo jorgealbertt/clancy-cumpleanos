@@ -120,6 +120,9 @@
         font: .76rem var(--mono);
       }
       .hero-date span { color: var(--muted); }
+      .archive-label { margin: 0 0 .65rem; color: var(--gold); font: .68rem var(--mono); letter-spacing: .1em; }
+      .archive-title { max-width: none; margin-bottom: .9rem; font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.05; }
+      .archive-message { max-width: 72ch; margin: 0; color: #e4dbcf; font: 1rem/1.8 var(--mono); }
       .section { margin-top: clamp(2.5rem, 6vw, 4.5rem); }
       .section-heading { max-width: 620px; margin-bottom: 1.3rem; }
       .section-heading h2 { margin-bottom: .55rem; font: 600 clamp(1.8rem, 4vw, 2.7rem)/1.08 var(--serif); letter-spacing: -.025em; }
@@ -206,6 +209,133 @@
       .song-links a { padding: .35rem .55rem; border: 1px solid #554b42; border-radius: .45rem; color: var(--ink); font-size: .72rem; text-decoration: none; }
       .song-links a:hover { border-color: var(--gold); color: var(--gold); }
       footer { padding-block: 1.25rem 2rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .75rem; text-align: center; }
+      .gift-layout { display: grid; gap: 1rem; }
+      .gatefold {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 1rem;
+        background: var(--panel);
+      }
+      .gatefold-cover {
+        display: grid;
+        width: 100%;
+        min-height: 150px;
+        place-items: center;
+        padding: 1.4rem;
+        border: 0;
+        background:
+          linear-gradient(135deg, rgb(239 87 77 / 20%) 25%, transparent 25% 50%, rgb(240 198 108 / 10%) 50% 75%, transparent 75%),
+          linear-gradient(145deg, #451d1c, #171513 75%);
+        background-size: 32px 32px, auto;
+        color: var(--ink);
+        cursor: pointer;
+        text-align: center;
+      }
+      .gatefold-cover strong { display: block; color: var(--gold); font: 700 1.15rem var(--mono); letter-spacing: .12em; }
+      .gatefold-cover span { display: block; margin-top: .5rem; color: #ded4c8; font-size: .82rem; }
+      .gatefold-cover[aria-expanded="true"] { border-bottom: 1px solid var(--red-dark); }
+      .letter-copy { max-width: 76ch; margin-inline: auto; }
+      .turntable {
+        display: grid;
+        gap: 1.4rem;
+        padding: clamp(1rem, 4vw, 2rem);
+        border: 1px solid var(--line);
+        border-radius: 1rem;
+        background: linear-gradient(145deg, rgb(112 45 41 / 13%), transparent 48%), var(--panel);
+      }
+      .turntable-info { display: grid; align-content: start; gap: .75rem; }
+      .turntable-info h3 { margin: 0; font: 600 1.5rem var(--serif); }
+      .turntable-info p { margin: 0; color: var(--muted); font-size: .9rem; }
+      .now-playing { padding: .8rem; border: 1px solid var(--line); border-radius: .65rem; background: #11100f; }
+      .now-playing span { display: block; color: var(--gold); font: .65rem var(--mono); letter-spacing: .1em; }
+      .now-playing strong { display: block; margin-top: .2rem; }
+      .player-controls { display: flex; flex-wrap: wrap; gap: .55rem; }
+      .player-controls .button { min-width: 46px; }
+      .vinyl-stage {
+        position: relative;
+        display: grid;
+        min-height: 320px;
+        place-items: center;
+        overflow: hidden;
+        border: 1px solid #302b27;
+        border-radius: .85rem;
+        background: radial-gradient(ellipse at center, #272320, #171513 65%);
+      }
+      .vinyl {
+        position: relative;
+        width: min(66vw, 280px);
+        aspect-ratio: 1;
+        border: 8px solid #080808;
+        border-radius: 50%;
+        background:
+          radial-gradient(circle, transparent 0 19%, rgb(255 255 255 / 8%) 19.3% 19.6%, transparent 20% 29%, rgb(255 255 255 / 6%) 29.3% 29.6%, transparent 30% 39%, rgb(255 255 255 / 7%) 39.3% 39.6%, transparent 40% 49%, rgb(255 255 255 / 7%) 49.3% 49.6%, transparent 50% 59%, rgb(255 255 255 / 7%) 59.3% 59.6%, transparent 60%),
+          conic-gradient(from 25deg, #100d0d 0 4%, #d7463e 4% 5%, #100d0d 5% 21%, #ef574d 21% 23%, #100d0d 23% 41%, #eebc5e 41% 42%, #d7463e 42% 44%, #100d0d 44% 69%, #d7463e 69% 71%, #100d0d 71% 88%, #ef574d 88% 90%, #100d0d 90%);
+        box-shadow: 0 16px 38px #000b, inset 0 0 24px #000;
+        cursor: grab;
+        touch-action: none;
+        user-select: none;
+      }
+      .vinyl:active { cursor: grabbing; }
+      .vinyl.spinning { animation: vinyl-spin 2.2s linear infinite; }
+      @keyframes vinyl-spin { to { rotate: 360deg; } }
+      .vinyl-label {
+        position: absolute;
+        inset: 34%;
+        display: grid;
+        align-content: center;
+        justify-items: center;
+        border: 5px solid #090909;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 30%, #e8564b, #741f20 76%);
+        color: #ffe4a3;
+        text-align: center;
+      }
+      .vinyl-label b { font: 700 clamp(.65rem, 2vw, .85rem) var(--mono); }
+      .vinyl-label small { margin-top: .25rem; font: .5rem var(--mono); }
+      .vinyl-label i { position: absolute; width: 7px; aspect-ratio: 1; border-radius: 50%; background: #080808; }
+      .tone-arm {
+        position: absolute;
+        z-index: 1;
+        top: 10px;
+        right: 12px;
+        width: 82px;
+        transform: rotate(-25deg);
+        transform-origin: 70% 12%;
+        transition: transform .45s ease;
+        pointer-events: none;
+      }
+      .tone-arm.playing { transform: rotate(0); }
+      .track-list { display: grid; max-height: 420px; gap: .45rem; overflow: auto; padding-right: .25rem; }
+      .track-button {
+        display: grid;
+        grid-template-columns: 2rem minmax(0, 1fr);
+        gap: .6rem;
+        width: 100%;
+        padding: .65rem;
+        border: 1px solid var(--line);
+        border-radius: .6rem;
+        background: #151311;
+        color: var(--ink);
+        cursor: pointer;
+        text-align: left;
+      }
+      .track-button:hover, .track-button[aria-pressed="true"] { border-color: var(--red); background: #2a1b19; }
+      .track-number { color: var(--gold); font: .75rem var(--mono); }
+      .track-button small { display: block; color: var(--muted); }
+      .dedication-list { display: grid; gap: .7rem; }
+      .dedication-card { padding: .85rem; border: 1px solid var(--line); border-radius: .7rem; background: #171513; }
+      .dedication-card h4 { margin: 0 0 .2rem; }
+      .dedication-card p { margin: 0; color: var(--muted); font-size: .82rem; }
+      .game-panel { padding: 1rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--panel); }
+      .game-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .8rem; }
+      .game-header h3 { margin: 0; font: 600 1.5rem var(--serif); }
+      .game-score { color: var(--gold); font: .85rem var(--mono); }
+      .game-canvas-wrap { position: relative; margin-top: 1rem; overflow: hidden; border: 1px solid var(--line); border-radius: .75rem; background: #100e0d; }
+      #game-canvas { display: block; width: 100%; height: 260px; touch-action: none; }
+      .game-message { position: absolute; inset: 0; display: grid; align-content: center; justify-items: center; gap: .6rem; padding: 1rem; background: rgb(17 16 15 / 82%); text-align: center; }
+      .game-message p { max-width: 38ch; margin: 0; color: #ddd4c8; }
+      .game-controls { display: flex; justify-content: space-between; gap: .75rem; margin-top: .7rem; color: var(--muted); font-size: .75rem; }
+      .game-controls .button { min-width: 100px; }
       [hidden] { display: none !important; }
       @media (min-width: 720px) {
         .clues { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -213,6 +343,7 @@
         .answer-row { align-items: stretch; flex-direction: column; }
         .answer-row .button { width: 100%; }
         .song-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .turntable { grid-template-columns: minmax(260px, .85fr) minmax(300px, 1.15fr); }
       }
       @media (max-width: 620px) {
         .brand-caption { display: none; }
@@ -247,9 +378,10 @@
 
     <main id="main" class="shell">
       <section class="hero" aria-labelledby="page-title">
-        <p class="eyebrow">Señal recibida · edición de cumpleaños</p>
-        <h1 id="page-title">Un pequeño lugar solo nuestro.</h1>
-        <p class="hero-copy">Si llegaste hasta aquí, encontraste el regalo que preparé para ti: una historia, algunos recuerdos y la música que nos acompaña.</p>
+        <p class="archive-label">ƎƆИƎUɊƎƧ ИOITԀYЯƆИƎ // CLANCY PROTOCOL</p>
+        <h1 class="archive-title" id="page-title">ARCHIVO CONFIDENCIAL N.º 24-11</h1>
+        <blockquote class="archive-message">"Si estás leyendo esto, lograste interceptar la señal fuera de los muros de Dema. Hay un artefacto exclusivo aguardando por tu cumpleaños, pero solo puede ser reclamado por la persona dueña de esta historia."</blockquote>
+        <p class="hero-copy">Un regalo hecho para ti: recuerdos, una carta y un pequeño tocadiscos con una señal sonora original.</p>
         <div class="hero-date"><span>PARA CELEBRAR</span> 24 DE NOVIEMBRE</div>
       </section>
 
@@ -286,42 +418,94 @@
         <div class="reveal" id="reveal" hidden>
           <p>IDENTIDAD CONFIRMADA · REGALO DESBLOQUEADO</p>
           <h3>Los muros se abren. Esta historia es tuya.</h3>
-          <button class="button button-gold" id="open-letter" type="button">Abrir tu carta <span aria-hidden="true">↓</span></button>
+          <button class="button button-gold" id="open-gift" type="button">Abrir la edición Clancy <span aria-hidden="true">↓</span></button>
         </div>
       </section>
 
-      <section class="section" id="letter" aria-labelledby="letter-title" hidden>
-        <div class="letter-card">
-          <div class="letter-art" aria-hidden="true"><span class="art-date">28 MAR · 04 ABR · 24 NOV</span><p class="art-caption">Donde<br>empieza la luz.</p></div>
-          <div class="letter-copy">
-            <p class="eyebrow">02 / Para ti, en tu día</p>
-            <h2 id="letter-title" tabindex="-1">Feliz cumpleaños, mi vida.</h2>
-            <p>Hoy es <strong>24 de noviembre</strong>, y no sabes cuánto celebro tu vida. Quería darte el vinilo de <em>Clancy</em> en tus manos, pero mientras llega ese momento, quise construirte un rincón que fuera solo nuestro, hecho línea por línea pensando en ti.</p>
-            <p>Desde aquel <strong>28 de marzo</strong> en que nuestro primer beso detuvo el tiempo, y ese <strong>4 de abril</strong> en nuestra primera cita, algo cambió para siempre. A veces la vida pesa demasiado y la mente se vuelve un lugar oscuro, como los muros de Dema; pero quiero que nunca olvides que <strong>ya no tienes que caminar sola por ahí</strong>.</p>
-            <p>Cada canción que me has dedicado ha sido como una ventana abierta hacia tu corazón. Sentir que soy tu paz, tu lugar seguro y parte de tu sanación es el regalo más grande que la vida me ha dado. Mientras yo esté aquí, siempre habrá una antorcha encendida para recordarte lo valiosa, hermosa e irremplazable que eres.</p>
-            <p><strong>Gracias por quedarte, por sanar y por dejarme amarte.</strong> Feliz cumpleaños. Te quiero con todo mi corazón.</p>
-            <p class="signature"><span>Con todo mi amor</span><span>| - /</span></p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="music" aria-labelledby="music-title" hidden>
+      <section class="section" id="gift" aria-labelledby="gift-title" hidden>
         <div class="section-heading">
-          <p class="eyebrow">03 / Nuestra banda sonora</p>
-          <h2 id="music-title">Canciones con historia.</h2>
-          <p>La música abre en Spotify o YouTube Music. No se carga audio hasta que tú eliges reproducirlo.</p>
+          <p class="eyebrow">02 / Edición especial</p>
+          <h2 id="gift-title" tabindex="-1">Clancy Splatter Edition</h2>
+          <p>Abre la funda, escucha la señal original y explora la transmisión.</p>
         </div>
-        <p class="music-note">Este regalo no aloja grabaciones: cada enlace te lleva a la búsqueda oficial del servicio que elijas.</p>
-        <div class="song-groups">
-          <section class="song-group" aria-labelledby="clancy-songs-title">
-            <h3 id="clancy-songs-title">Clancy · lado A / lado B</h3>
-            <p class="group-intro">Una edición especial para escuchar a tu manera.</p>
-            <div class="song-list" id="clancy-songs"></div>
+
+        <div class="gift-layout">
+          <section class="gatefold" aria-label="Funda desplegable y carta">
+            <button class="gatefold-cover" id="gatefold-toggle" type="button" aria-expanded="false" aria-controls="birthday-letter">
+              <span><strong>CLANCY · 24-11</strong><span id="gatefold-caption">Haz clic para desplegar la funda y leer tu carta</span></span>
+            </button>
+            <article class="letter-copy" id="birthday-letter" hidden>
+              <p class="eyebrow">PARA TI, EN TU DÍA · 24 DE NOVIEMBRE</p>
+              <h3>Feliz cumpleaños, mi vida.</h3>
+              <p>Hoy es <strong>24 de noviembre</strong>, y no sabes cuánto celebro tu vida. Quería darte el vinilo de <em>Clancy</em> en tus manos, pero mientras llega ese momento, quise construirte un rincón que fuera solo nuestro, hecho línea por línea pensando en ti.</p>
+              <p>Desde aquel <strong>28 de marzo</strong> en que nuestro primer beso detuvo el tiempo, y ese <strong>4 de abril</strong> en nuestra primera cita, algo cambió para siempre. A veces la vida pesa demasiado y la mente se vuelve un lugar oscuro, como los muros de Dema; pero quiero que nunca olvides que <strong>ya no tienes que caminar sola por ahí</strong>.</p>
+              <p>Cada canción que me has dedicado ha sido como una ventana abierta hacia tu corazón. Sentir que soy tu paz, tu lugar seguro y parte de tu sanación es el regalo más grande que la vida me ha dado. Mientras yo esté aquí, siempre habrá una antorcha encendida para recordarte lo valiosa, hermosa e irremplazable que eres.</p>
+              <p><strong>Gracias por quedarte, por sanar y por dejarme amarte.</strong> Feliz cumpleaños. Te quiero con todo mi corazón.</p>
+              <p class="signature"><span>Con todo mi amor</span><span>| - /</span></p>
+            </article>
           </section>
+
+          <section class="turntable" aria-labelledby="turntable-title">
+            <div class="turntable-info">
+              <div>
+                <p class="eyebrow">03 / Lado A · Lado B</p>
+                <h3 id="turntable-title">El tocadiscos interactivo</h3>
+              </div>
+              <p>Una textura sonora original, creada aquí mismo. No reproduce las grabaciones comerciales del álbum.</p>
+              <div class="now-playing" aria-live="polite">
+                <span>SEÑAL ACTUAL</span>
+                <strong id="now-playing-title">01 · Overcompensate</strong>
+                <small id="now-playing-note">Bienvenida a Clancy. Volvemos más fuertes; gracias por dejarme entrar en tu mundo y empezar esta historia juntos.</small>
+              </div>
+              <div class="player-controls" aria-label="Controles del tocadiscos">
+                <button class="button" id="previous-track" type="button" aria-label="Pista anterior">|◀</button>
+                <button class="button button-gold" id="toggle-play" type="button" aria-pressed="false">▶ Escuchar señal</button>
+                <button class="button" id="next-track" type="button" aria-label="Pista siguiente">▶|</button>
+              </div>
+              <p id="audio-status" role="status">Pulsa escuchar para iniciar el sintetizador original.</p>
+            </div>
+            <div class="vinyl-stage">
+              <div class="vinyl" id="vinyl-disc" role="img" aria-label="Vinilo negro con salpicaduras rojas y doradas; puedes arrastrarlo para girarlo">
+                <div class="vinyl-label"><b>| - /</b><small>CLANCY · 24-11</small><i></i></div>
+              </div>
+              <svg class="tone-arm" id="tone-arm" viewBox="0 0 100 180" aria-hidden="true">
+                <circle cx="76" cy="24" r="13" fill="#26211e" stroke="#9e8d77" stroke-width="3"/>
+                <path d="M76 24 61 100 32 148" fill="none" stroke="#d6c9b8" stroke-width="5" stroke-linecap="round"/>
+                <path d="M32 148 24 160" fill="none" stroke="#ef574d" stroke-width="8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div>
+              <h4>Pistas de Clancy</h4>
+              <div class="track-list" id="track-list" aria-label="Seleccionar pista"></div>
+            </div>
+          </section>
+
           <section class="song-group" aria-labelledby="dedicated-songs-title">
             <h3 id="dedicated-songs-title">Las canciones que me dedicaste</h3>
-            <p class="group-intro">Pequeñas notas sobre lo que cada una significa para mí.</p>
-            <div class="song-list" id="dedicated-songs"></div>
+            <p class="group-intro">Cada una guarda una parte de nuestra historia. Los títulos y las notas son homenajes personales; no se incluyen letras ni grabaciones del álbum.</p>
+            <div class="dedication-list" id="dedication-list"></div>
+          </section>
+
+          <section class="game-panel" aria-labelledby="game-title">
+            <div class="game-header">
+              <div>
+                <p class="eyebrow">04 / Transmisión Bandito</p>
+                <h3 id="game-title">Escapando de Dema</h3>
+              </div>
+              <span class="game-score">Antorchas: <strong id="game-score">0</strong> / 24</span>
+            </div>
+            <p>Salta los muros y recoge antorchas. Puedes jugar con la barra espaciadora, la flecha ↑ o los controles táctiles.</p>
+            <div class="game-canvas-wrap">
+              <canvas id="game-canvas" aria-label="Minijuego: Clancy salta obstáculos y recoge antorchas"></canvas>
+              <div class="game-message" id="game-message">
+                <p id="game-message-text">Enciende 24 puntos de luz para escapar de Dema.</p>
+                <button class="button button-gold" id="start-game" type="button">Iniciar carrera</button>
+              </div>
+            </div>
+            <div class="game-controls">
+              <span>ESPACIO / ↑ / TOCAR PARA SALTAR</span>
+              <button class="button" id="jump-button" type="button">Saltar ↑</button>
+            </div>
           </section>
         </div>
       </section>
@@ -399,73 +583,353 @@
           if (solved.size === 3) {
             document.getElementById("reveal").hidden = false;
             document.getElementById("reveal").scrollIntoView({ behavior: "smooth", block: "nearest" });
-            document.getElementById("open-letter").focus({ preventScroll: true });
+            document.getElementById("open-gift").focus({ preventScroll: true });
           }
         });
       });
 
-      document.getElementById("open-letter").addEventListener("click", () => {
-        document.getElementById("letter").hidden = false;
-        document.getElementById("music").hidden = false;
-        document.getElementById("letter").scrollIntoView({ behavior: "smooth", block: "start" });
-        document.getElementById("letter-title").focus({ preventScroll: true });
+      const gift = document.getElementById("gift");
+      document.getElementById("open-gift").addEventListener("click", () => {
+        gift.hidden = false;
+        gift.scrollIntoView({ behavior: "smooth", block: "start" });
+        document.getElementById("gift-title").focus({ preventScroll: true });
+        resizeGame();
       });
 
-      function platformLink(service, title, artist) {
-        const query = encodeURIComponent(`${title} ${artist}`);
-        const link = document.createElement("a");
-        link.href = service === "spotify"
-          ? `https://open.spotify.com/search/${query}`
-          : `https://music.youtube.com/search?q=${query}`;
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-        link.textContent = service === "spotify" ? "Spotify ↗" : "YouTube Music ↗";
-        return link;
+      const gatefoldButton = document.getElementById("gatefold-toggle");
+      const birthdayLetter = document.getElementById("birthday-letter");
+      gatefoldButton.addEventListener("click", () => {
+        const isOpen = gatefoldButton.getAttribute("aria-expanded") === "true";
+        gatefoldButton.setAttribute("aria-expanded", String(!isOpen));
+        birthdayLetter.hidden = isOpen;
+        document.getElementById("gatefold-caption").textContent = isOpen
+          ? "Haz clic para desplegar la funda y leer tu carta"
+          : "Funda desplegada · carta para ti";
+      });
+
+      let currentTrackIndex = 0;
+      const trackList = document.getElementById("track-list");
+      const trackButtons = [];
+      clancySongs.forEach(([title, side, note], index) => {
+        const button = document.createElement("button");
+        button.className = "track-button";
+        button.type = "button";
+        button.setAttribute("aria-pressed", String(index === currentTrackIndex));
+        const number = document.createElement("span");
+        number.className = "track-number";
+        number.textContent = String(index + 1).padStart(2, "0");
+        const details = document.createElement("span");
+        details.append(document.createTextNode(title));
+        const sideLabel = document.createElement("small");
+        sideLabel.textContent = side;
+        details.append(sideLabel);
+        button.append(number, details);
+        button.addEventListener("click", () => selectTrack(index));
+        trackList.append(button);
+        trackButtons.push(button);
+      });
+
+      const dedicationList = document.getElementById("dedication-list");
+      dedicatedSongs.forEach(([title, artist, tag, note]) => {
+        const card = document.createElement("article");
+        card.className = "dedication-card";
+        const heading = document.createElement("h4");
+        heading.textContent = `${title} · ${tag}`;
+        const credit = document.createElement("p");
+        credit.textContent = artist;
+        const dedication = document.createElement("p");
+        dedication.textContent = note;
+        card.append(heading, credit, dedication);
+        dedicationList.append(card);
+      });
+
+      const vinyl = document.getElementById("vinyl-disc");
+      const toneArm = document.getElementById("tone-arm");
+      const playButton = document.getElementById("toggle-play");
+      const audioStatus = document.getElementById("audio-status");
+      const nowPlayingTitle = document.getElementById("now-playing-title");
+      const nowPlayingNote = document.getElementById("now-playing-note");
+      let audioContext = null;
+      let activeVoices = [];
+      let isPlaying = false;
+      let vinylAngle = 0;
+      let draggingVinyl = false;
+      let lastPointerAngle = 0;
+
+      function selectTrack(index) {
+        const wasPlaying = isPlaying;
+        stopSignal();
+        currentTrackIndex = (index + clancySongs.length) % clancySongs.length;
+        const [title, , note] = clancySongs[currentTrackIndex];
+        nowPlayingTitle.textContent = `${String(currentTrackIndex + 1).padStart(2, "0")} · ${title}`;
+        nowPlayingNote.textContent = note;
+        trackButtons.forEach((button, trackIndex) => {
+          button.setAttribute("aria-pressed", String(trackIndex === currentTrackIndex));
+        });
+        if (wasPlaying) startSignal();
       }
 
-      function addSongCard(container, { title, artist, tag, note, searchTitle = title, searchArtist = artist }) {
-        const card = document.createElement("article");
-        card.className = "song-card";
-        const heading = document.createElement("div");
-        heading.className = "song-title-row";
-        const name = document.createElement("h4");
-        name.className = "song-title";
-        name.textContent = title;
-        heading.append(name);
+      function stopSignal() {
+        isPlaying = false;
+        playButton.setAttribute("aria-pressed", "false");
+        playButton.textContent = "▶ Escuchar señal";
+        vinyl.classList.remove("spinning");
+        toneArm.classList.remove("playing");
+        if (audioContext) {
+          const now = audioContext.currentTime;
+          activeVoices.forEach(({ oscillator, gain }) => {
+            gain.gain.cancelScheduledValues(now);
+            gain.gain.setTargetAtTime(0, now, .05);
+            oscillator.stop(now + .2);
+            oscillator.onended = () => {
+              oscillator.disconnect();
+              gain.disconnect();
+            };
+          });
+        }
+        activeVoices = [];
+      }
 
-        if (tag) {
-          const badge = document.createElement("span");
-          badge.className = "song-tag";
-          badge.textContent = tag;
-          heading.append(badge);
+      async function startSignal() {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) {
+          audioStatus.textContent = "Este navegador no admite el sintetizador de audio.";
+          return;
+        }
+        try {
+          audioContext ??= new AudioContextClass();
+          await audioContext.resume();
+        } catch (error) {
+          audioStatus.textContent = `No se pudo iniciar el audio: ${error.message}`;
+          return;
         }
 
-        const artistLine = document.createElement("p");
-        artistLine.className = "song-artist";
-        artistLine.textContent = artist;
-        const noteLine = document.createElement("p");
-        noteLine.className = "song-note";
-        noteLine.textContent = note;
-        const links = document.createElement("div");
-        links.className = "song-links";
-        links.setAttribute("aria-label", `Escuchar ${title}`);
-        links.append(platformLink("spotify", searchTitle, searchArtist), platformLink("youtube", searchTitle, searchArtist));
-        card.append(heading, artistLine, noteLine, links);
-        container.append(card);
+        stopSignal();
+        const root = 110 * 2 ** (((currentTrackIndex * 3) % 12) / 12);
+        [root, root * 1.26, root * 1.5].forEach((frequency, index) => {
+          const oscillator = audioContext.createOscillator();
+          const gain = audioContext.createGain();
+          oscillator.type = index === 0 ? "sine" : "triangle";
+          oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+          gain.gain.setValueAtTime(.001, audioContext.currentTime);
+          gain.gain.linearRampToValueAtTime(index === 0 ? .035 : .014, audioContext.currentTime + .8);
+          oscillator.connect(gain);
+          gain.connect(audioContext.destination);
+          oscillator.start();
+          activeVoices.push({ oscillator, gain });
+        });
+        isPlaying = true;
+        playButton.setAttribute("aria-pressed", "true");
+        playButton.textContent = "Ⅱ Pausar señal";
+        vinyl.classList.add("spinning");
+        toneArm.classList.add("playing");
+        audioStatus.textContent = "Sintetizador original activo · sin grabaciones externas.";
       }
 
-      clancySongs.forEach(([title, side, note], index) => {
-        addSongCard(document.getElementById("clancy-songs"), {
-          title: `${String(index + 1).padStart(2, "0")}. ${title}`,
-          artist: `Twenty One Pilots · ${side}`,
-          note,
-          searchTitle: title,
-          searchArtist: "Twenty One Pilots"
+      playButton.addEventListener("click", () => {
+        if (isPlaying) {
+          stopSignal();
+          audioStatus.textContent = "Señal en pausa.";
+        } else {
+          startSignal();
+        }
+      });
+      document.getElementById("previous-track").addEventListener("click", () => selectTrack(currentTrackIndex - 1));
+      document.getElementById("next-track").addEventListener("click", () => selectTrack(currentTrackIndex + 1));
+
+      function pointerAngle(event) {
+        const rect = vinyl.getBoundingClientRect();
+        return Math.atan2(event.clientY - rect.top - rect.height / 2, event.clientX - rect.left - rect.width / 2) * 180 / Math.PI;
+      }
+      vinyl.addEventListener("pointerdown", (event) => {
+        draggingVinyl = true;
+        lastPointerAngle = pointerAngle(event);
+        vinyl.setPointerCapture(event.pointerId);
+      });
+      vinyl.addEventListener("pointermove", (event) => {
+        if (!draggingVinyl) return;
+        let delta = pointerAngle(event) - lastPointerAngle;
+        if (delta > 180) delta -= 360;
+        if (delta < -180) delta += 360;
+        vinylAngle = (vinylAngle + delta + 360) % 360;
+        vinyl.style.transform = `rotate(${vinylAngle}deg)`;
+        lastPointerAngle = pointerAngle(event);
+      });
+      ["pointerup", "pointercancel"].forEach((eventName) => {
+        vinyl.addEventListener(eventName, () => { draggingVinyl = false; });
+      });
+
+      const gameCanvas = document.getElementById("game-canvas");
+      const gameContext = gameCanvas.getContext("2d");
+      const gameScore = document.getElementById("game-score");
+      const gameMessage = document.getElementById("game-message");
+      const gameMessageText = document.getElementById("game-message-text");
+      const gameStartButton = document.getElementById("start-game");
+      let gameWidth = 0;
+      let gameHeight = 260;
+      let gameRunning = false;
+      let gameFrame = 0;
+      let gameScoreValue = 0;
+      let gameAnimation = 0;
+      let player = { x: 54, y: 180, width: 25, height: 38, velocityY: 0, jumps: 2 };
+      let obstacles = [];
+      let torches = [];
+
+      function resizeGame() {
+        if (!gameContext || gift.hidden) return;
+        const rect = gameCanvas.getBoundingClientRect();
+        if (!rect.width) return;
+        const ratio = window.devicePixelRatio || 1;
+        gameWidth = rect.width;
+        gameHeight = rect.height;
+        gameCanvas.width = Math.round(gameWidth * ratio);
+        gameCanvas.height = Math.round(gameHeight * ratio);
+        gameContext.setTransform(ratio, 0, 0, ratio, 0, 0);
+        drawGame();
+      }
+
+      function drawGame() {
+        if (!gameContext || !gameWidth) return;
+        const ground = gameHeight - 28;
+        const sky = gameContext.createLinearGradient(0, 0, 0, gameHeight);
+        sky.addColorStop(0, "#11100f");
+        sky.addColorStop(1, "#642724");
+        gameContext.fillStyle = sky;
+        gameContext.fillRect(0, 0, gameWidth, gameHeight);
+        gameContext.fillStyle = "#191412";
+        for (let index = 0; index < 8; index += 1) {
+          const x = (index * 120 - gameFrame * 1.1) % (gameWidth + 120);
+          const height = 50 + index % 3 * 18;
+          gameContext.fillRect(x, ground - height, 34, height);
+        }
+        gameContext.fillStyle = "#0b0a09";
+        gameContext.fillRect(0, ground, gameWidth, gameHeight - ground);
+        gameContext.fillStyle = "#ef574d";
+        gameContext.fillRect(0, ground, gameWidth, 3);
+
+        gameContext.fillStyle = "#ef574d";
+        gameContext.fillRect(player.x - 19, player.y + 13, 23, 5);
+        gameContext.fillStyle = "#292522";
+        gameContext.fillRect(player.x + 5, player.y + 11, 18, 27);
+        gameContext.beginPath();
+        gameContext.arc(player.x + 14, player.y + 7, 8, 0, Math.PI * 2);
+        gameContext.fillStyle = "#453a33";
+        gameContext.fill();
+
+        torches.forEach((torch) => {
+          gameContext.beginPath();
+          gameContext.arc(torch.x, torch.y, 13, 0, Math.PI * 2);
+          gameContext.fillStyle = "rgb(240 198 108 / 25%)";
+          gameContext.fill();
+          gameContext.beginPath();
+          gameContext.arc(torch.x, torch.y, 6, 0, Math.PI * 2);
+          gameContext.fillStyle = "#f0c66c";
+          gameContext.fill();
         });
+        obstacles.forEach((obstacle) => {
+          gameContext.fillStyle = "#211a17";
+          gameContext.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+          gameContext.strokeStyle = "#ef574d";
+          gameContext.strokeRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+        });
+      }
+
+      function jump() {
+        if (!gameRunning || player.jumps <= 0) return;
+        player.velocityY = -10.5;
+        player.jumps -= 1;
+      }
+
+      function finishGame(won) {
+        gameRunning = false;
+        cancelAnimationFrame(gameAnimation);
+        gameMessage.hidden = false;
+        gameMessageText.textContent = won
+          ? "¡Escapaste de Dema! Las 24 antorchas ya están encendidas."
+          : `La carrera terminó en ${gameScoreValue} / 24 antorchas. Puedes intentarlo de nuevo.`;
+        gameStartButton.textContent = "Jugar de nuevo";
+      }
+
+      function gameLoop() {
+        if (!gameRunning) return;
+        const ground = gameHeight - 28;
+        gameFrame += 1;
+        player.velocityY += .55;
+        player.y += player.velocityY;
+        if (player.y >= ground - player.height) {
+          player.y = ground - player.height;
+          player.velocityY = 0;
+          player.jumps = 2;
+        }
+
+        if (gameFrame % 96 === 0) {
+          const height = 28 + Math.random() * 24;
+          obstacles.push({ x: gameWidth + 15, y: ground - height, width: 22, height });
+        }
+        if (gameFrame % 44 === 0) {
+          torches.push({ x: gameWidth + 12, y: ground - 42 - Math.random() * 82, radius: 8 });
+        }
+
+        obstacles = obstacles.filter((obstacle) => {
+          obstacle.x -= 4.2;
+          const hit = player.x + player.width - 4 > obstacle.x + 4
+            && player.x + 4 < obstacle.x + obstacle.width - 4
+            && player.y + player.height - 4 > obstacle.y + 4;
+          if (hit) finishGame(false);
+          return obstacle.x > -obstacle.width;
+        });
+        if (!gameRunning) {
+          drawGame();
+          return;
+        }
+        torches = torches.filter((torch) => {
+          torch.x -= 4.2;
+          const caught = Math.abs(player.x + player.width / 2 - torch.x) < 22
+            && Math.abs(player.y + player.height / 2 - torch.y) < 28;
+          if (caught) {
+            gameScoreValue = Math.min(24, gameScoreValue + 2);
+            gameScore.textContent = String(gameScoreValue);
+            if (gameScoreValue >= 24) finishGame(true);
+          }
+          return !caught && torch.x > -20;
+        });
+        drawGame();
+        if (gameRunning) gameAnimation = requestAnimationFrame(gameLoop);
+      }
+
+      function startGame() {
+        if (!gameContext) {
+          gameMessageText.textContent = "Este navegador no puede iniciar el juego.";
+          return;
+        }
+        resizeGame();
+        gameRunning = true;
+        gameFrame = 0;
+        gameScoreValue = 0;
+        gameScore.textContent = "0";
+        obstacles = [];
+        torches = [];
+        player = { x: 54, y: gameHeight - 66, width: 25, height: 38, velocityY: 0, jumps: 2 };
+        gameMessage.hidden = true;
+        cancelAnimationFrame(gameAnimation);
+        gameLoop();
+      }
+
+      gameStartButton.addEventListener("click", startGame);
+      document.getElementById("jump-button").addEventListener("click", jump);
+      gameCanvas.addEventListener("pointerdown", (event) => {
+        event.preventDefault();
+        jump();
       });
-      dedicatedSongs.forEach(([title, artist, tag, note]) => {
-        addSongCard(document.getElementById("dedicated-songs"), { title, artist, tag, note });
+      window.addEventListener("keydown", (event) => {
+        if (event.target instanceof HTMLElement && event.target.closest("button, input, a")) return;
+        if (gameRunning && (event.code === "Space" || event.code === "ArrowUp")) {
+          event.preventDefault();
+          jump();
+        }
       });
+      window.addEventListener("resize", resizeGame);
+      resizeGame();
     </script>
   </body>
 </html>

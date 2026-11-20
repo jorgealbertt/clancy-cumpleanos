@@ -1,6 +1,6 @@
 # Clancy — edición de cumpleaños
 
-Sitio estático en español hecho como regalo: pistas personales, una carta y enlaces para escuchar música en servicios oficiales. No aloja música ni carga reproductores de terceros automáticamente; cada botón abre una búsqueda en Spotify o YouTube Music cuando la persona decide escuchar.
+Sitio estático en español hecho como regalo: acertijos personales, una carta desplegable, un tocadiscos interactivo y un minijuego arcade. El tocadiscos genera una señal sintética original directamente en el navegador; no se conecta a Spotify o YouTube Music ni aloja las grabaciones comerciales del álbum.
 
 ## Publicar en GitHub Pages
 
@@ -12,4 +12,4 @@ No hay proceso de compilación ni dependencias: `index.html` es el sitio y puede
 
 ## Personalizar
 
-Edita la carta, las respuestas de las tres pistas y las listas `clancySongs` / `dedicatedSongs` dentro de `index.html`. Las pistas solo son una interacción lúdica del lado del navegador, no un control de acceso.
+Edita la carta, las respuestas de las tres pistas y las listas `clancySongs` / `dedicatedSongs` dentro de `index.html`. Las pistas solo son una interacción lúdica del lado del navegador, no un control de acceso. No publiques canciones comerciales, letras ni archivos LRC; cualquier audio que se añada debe ser una grabación propia o contar con licencia para redistribución pública.
