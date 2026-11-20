@@ -164,6 +164,17 @@
       }
       .button:hover { transform: translateY(-1px); background: #ff7468; }
       .button:disabled { border-color: rgb(148 169 139 / 42%); background: #2b382c; color: #d7e1d3; cursor: default; transform: none; }
+      .button-side {
+        background: #221d1a;
+        border-color: #554b42;
+        color: var(--gold);
+        font-family: var(--mono);
+        font-size: .75rem;
+      }
+      .button-side:hover {
+        background: #2f2622;
+        border-color: var(--gold);
+      }
       .hint { min-height: 1.25em; margin: .55rem 0 0; color: var(--gold); font-size: .8rem; }
       .progress-wrap { margin-top: 1.1rem; }
       .progress-label { display: flex; justify-content: space-between; gap: 1rem; margin-bottom: .4rem; color: var(--muted); font: .7rem var(--mono); }
@@ -212,7 +223,7 @@
       .gatefold-cover span { display: block; margin-top: .5rem; color: #ded4c8; font-size: .82rem; }
       .gatefold-cover[aria-expanded="true"] { border-bottom: 1px solid var(--red-dark); }
 
-      /* TOCADISCOS Y VINILO CLANCY SPLATTER CON 24-11 */
+      /* TOCADISCOS Y VINILO IDÉNTICO A LA CAPTURA CON 24-11 */
       .turntable {
         display: grid;
         gap: 1.4rem;
@@ -221,13 +232,20 @@
         border-radius: 1rem;
         background: linear-gradient(145deg, rgb(112 45 41 / 13%), transparent 48%), var(--panel);
       }
+      .turntable-head-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: .5rem;
+        flex-wrap: wrap;
+      }
       .turntable-info { display: grid; align-content: start; gap: .75rem; }
       .turntable-info h3 { margin: 0; font: 600 1.5rem var(--serif); }
       .turntable-info p { margin: 0; color: var(--muted); font-size: .9rem; }
       .now-playing { padding: .9rem; border: 1px solid rgb(239 87 77 / 32%); border-radius: .7rem; background: #11100f; }
       .now-playing span { display: block; color: var(--gold); font: .65rem var(--mono); letter-spacing: .1em; }
-      .now-playing strong { display: block; margin-top: .25rem; font-size: 1.02rem; }
-      .now-playing small { display: block; margin-top: .4rem; color: #e2d8cb; font-size: .84rem; line-height: 1.55; }
+      .now-playing strong { display: block; margin-top: .25rem; font-size: 1.05rem; }
+      .now-playing small { display: block; margin-top: .45rem; color: #e2d8cb; font-size: .86rem; line-height: 1.55; }
 
       .audio-bar-row { display: flex; align-items: center; gap: .6rem; margin-top: .8rem; font: .7rem var(--mono); color: var(--muted); }
       .audio-seek { flex: 1; height: 7px; border-radius: 999px; background: #26211e; cursor: pointer; position: relative; overflow: hidden; }
@@ -239,7 +257,7 @@
       .platter-deck {
         position: relative;
         display: grid;
-        min-height: 340px;
+        min-height: 350px;
         place-items: center;
         overflow: hidden;
         padding: 1rem;
@@ -250,130 +268,61 @@
           linear-gradient(160deg, #1d1a17, #110f0d);
         box-shadow: inset 0 2px 14px rgb(0 0 0 / 65%);
       }
+      .side-swap-banner {
+        position: absolute;
+        z-index: 5;
+        top: .75rem;
+        left: .75rem;
+        padding: .3rem .6rem;
+        border-radius: 999px;
+        background: rgb(17 16 15 / 85%);
+        border: 1px solid rgb(240 198 108 / 45%);
+        color: var(--gold);
+        font: 700 .65rem var(--mono);
+        letter-spacing: .1em;
+        opacity: 0;
+        transform: translateY(-6px);
+        transition: opacity .25s ease, transform .25s ease;
+        pointer-events: none;
+      }
+      .side-swap-banner.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
       .platter-rim {
         position: relative;
         display: grid;
         place-items: center;
-        width: min(70vw, 290px);
+        width: min(74vw, 300px);
         aspect-ratio: 1;
         border-radius: 50%;
         background: radial-gradient(circle, #181614 66%, #342f2b 68%, #161412 71%);
         box-shadow: 0 18px 40px rgb(0 0 0 / 75%), 0 0 0 2px #292420;
       }
-      /* Vinilo negro con salpicaduras rojas radiales estilo Clancy */
       .vinyl {
         position: relative;
         width: 93%;
         aspect-ratio: 1;
-        border: 5px solid #070707;
         border-radius: 50%;
-        background:
-          repeating-radial-gradient(circle, transparent 0 2.5px, rgb(255 255 255 / 4%) 2.8px 3.5px),
-          conic-gradient(
-            from 18deg,
-            #0c0a0a 0 3%,
-            rgb(218 52 43 / 88%) 3.6% 5.2%,
-            rgb(239 87 77 / 32%) 6.5% 8%,
-            #0c0a0a 9% 19%,
-            rgb(225 58 47 / 92%) 19.6% 21.8%,
-            rgb(239 87 77 / 35%) 23% 25%,
-            #0c0a0a 26% 37%,
-            rgb(208 46 38 / 82%) 37.5% 38.8%,
-            #0c0a0a 40% 53%,
-            rgb(239 87 77 / 90%) 53.6% 56.2%,
-            rgb(215 70 62 / 30%) 57.5% 59.5%,
-            #0c0a0a 61% 74%,
-            rgb(222 54 44 / 85%) 74.6% 76.4%,
-            #0c0a0a 78% 89%,
-            rgb(239 87 77 / 88%) 89.5% 91.5%,
-            #0c0a0a 92.5% 100%
-          );
-        box-shadow:
-          inset 0 0 26px rgb(0 0 0 / 88%),
-          inset 0 0 0 26px rgb(12 10 10 / 28%);
+        box-shadow: 0 4px 16px rgb(0 0 0 / 85%);
         cursor: grab;
         touch-action: none;
         user-select: none;
       }
-      /* Difuminado exterior negro para que las salpicaduras se desvanezcan hacia el borde como en el disco */
-      .vinyl::before {
-        position: absolute;
-        inset: 0;
+      .vinyl:active { cursor: grabbing; }
+      #vinyl-canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
         border-radius: 50%;
-        background: radial-gradient(circle, transparent 42%, rgb(10 9 9 / 48%) 74%, rgb(8 7 7 / 82%) 96%);
-        content: "";
         pointer-events: none;
       }
-      .vinyl:active { cursor: grabbing; }
       .vinyl-sheen {
         position: absolute;
         inset: 3%;
         border-radius: 50%;
-        background: conic-gradient(from -35deg, transparent 0 12%, rgb(255 255 255 / 10%) 18%, transparent 25% 62%, rgb(255 255 255 / 7%) 68%, transparent 75%);
-        pointer-events: none;
-      }
-      /* Etiqueta central estilo Clancy con | - / y 24-11 */
-      .vinyl-label {
-        position: relative;
-        position: absolute;
-        inset: 33%;
-        display: grid;
-        grid-template-columns: 1fr 1.25fr;
-        align-items: center;
-        overflow: hidden;
-        border: 3px solid #090909;
-        border-radius: 50%;
-        background: linear-gradient(90deg, #b8372e 0 42%, #d9463c 42% 100%);
-        color: #140b0a;
-        box-shadow: 0 0 0 2px rgb(239 87 77 / 22%);
-      }
-      .vinyl-label::after {
-        position: absolute;
-        top: 50%;
-        left: 0;
-        right: 0;
-        height: 1.5px;
-        background: rgb(20 11 10 / 55%);
-        transform: translateY(-50%);
-        content: "";
-        pointer-events: none;
-      }
-      .label-side {
-        display: grid;
-        place-items: center;
-        font: 800 clamp(.55rem, 1.5vw, .7rem) var(--mono);
-        letter-spacing: .04em;
-        color: #180c0b;
-      }
-      .label-main {
-        display: grid;
-        align-content: center;
-        justify-items: center;
-        padding-right: 4px;
-        color: #140b0a;
-      }
-      .label-main b {
-        font: 800 clamp(.78rem, 2.2vw, 1.05rem) var(--mono);
-        letter-spacing: -.04em;
-        line-height: 1;
-      }
-      .label-main small {
-        margin-top: 4px;
-        font: 700 clamp(.44rem, 1.2vw, .54rem) var(--mono);
-        letter-spacing: .06em;
-        color: #fff0d6;
-        background: rgb(17 16 15 / 72%);
-        padding: 1px 4px;
-        border-radius: 3px;
-      }
-      .spindle {
-        position: absolute;
-        z-index: 2;
-        width: 10px;
-        aspect-ratio: 1;
-        border-radius: 50%;
-        background: radial-gradient(circle at 35% 35%, #f5efe6, #6e655c 75%, #1c1917);
-        box-shadow: 0 2px 4px rgb(0 0 0 / 80%);
+        background: conic-gradient(from -35deg, transparent 0 12%, rgb(255 255 255 / 9%) 18%, transparent 25% 62%, rgb(255 255 255 / 6%) 68%, transparent 75%);
         pointer-events: none;
       }
       .stylus-spark {
@@ -403,10 +352,10 @@
         position: absolute;
         z-index: 4;
         top: 10px;
-        right: max(8px, calc(50% - 168px));
-        width: 112px;
-        height: 235px;
-        transform-origin: 78px 34px;
+        right: max(8px, calc(50% - 174px));
+        width: 114px;
+        height: 238px;
+        transform-origin: 79px 34px;
         transform: rotate(-32deg);
         transition: transform .48s cubic-bezier(.22, .68, .32, 1.05);
         cursor: pointer;
@@ -417,27 +366,6 @@
         transition: none;
         cursor: grabbing;
       }
-
-      .track-list { display: grid; max-height: 440px; gap: .55rem; overflow: auto; padding-right: .25rem; }
-      .track-button {
-        display: grid;
-        grid-template-columns: 2.2rem minmax(0, 1fr);
-        gap: .65rem;
-        width: 100%;
-        padding: .75rem;
-        border: 1px solid var(--line);
-        border-radius: .65rem;
-        background: #151311;
-        color: var(--ink);
-        cursor: pointer;
-        text-align: left;
-        transition: border-color .15s ease, background-color .15s ease;
-      }
-      .track-button:hover, .track-button[aria-pressed="true"] { border-color: var(--red); background: #2a1b19; }
-      .track-number { color: var(--gold); font: 700 .78rem var(--mono); }
-      .track-title { display: block; font-weight: 650; font-size: .92rem; }
-      .track-note { display: block; margin-top: .25rem; color: var(--muted); font-size: .78rem; line-height: 1.45; }
-      .track-side { display: inline-block; margin-top: .3rem; color: var(--red); font: .62rem var(--mono); letter-spacing: .08em; text-transform: uppercase; }
 
       .dedication-list { display: grid; gap: .7rem; }
       .dedication-card { padding: .85rem; border: 1px solid var(--line); border-radius: .7rem; background: #171513; }
@@ -456,29 +384,61 @@
       .game-controls { display: flex; justify-content: space-between; gap: .75rem; margin-top: .7rem; color: var(--muted); font-size: .75rem; }
       .game-controls .button { min-width: 100px; }
       [hidden] { display: none !important; }
+
       @media (min-width: 720px) {
         .clues { grid-template-columns: repeat(3, minmax(0, 1fr)); }
         .clue-head { align-items: flex-start; flex-direction: column; gap: .3rem; min-height: 2rem; }
         .answer-row { align-items: stretch; flex-direction: column; }
         .answer-row .button { width: 100%; }
-        .turntable { grid-template-columns: minmax(270px, .9fr) minmax(300px, 1.1fr); }
-        .turntable-tracks { grid-column: 1 / -1; }
+        .turntable { grid-template-columns: minmax(280px, .92fr) minmax(320px, 1.08fr); }
       }
-      @media (max-width: 620px) {
-        .brand-caption { display: none; }
-        .edition-tag { font-size: .58rem; }
-        .platter-deck { min-height: 300px; padding: .75rem; }
-        .platter-rim { width: min(64vw, 240px); }
+
+      /* ANCHO COMPLETO EN CELULAR PARA EL TOCADISCOS */
+      @media (max-width: 719px) {
+        #gift.shell {
+          width: 100%;
+          padding-inline: 0;
+        }
+        #gift > .section-heading {
+          padding-inline: 1rem;
+        }
+        .gift-layout {
+          gap: 1rem;
+        }
+        .turntable {
+          border-radius: 0;
+          border-inline: 0;
+          padding: 1.1rem .85rem 1.35rem;
+          gap: 1.1rem;
+        }
+        .platter-deck {
+          min-height: 360px;
+          width: 100%;
+          padding: 1rem .5rem;
+          border-radius: .75rem;
+        }
+        .platter-rim {
+          width: min(82vw, 310px);
+        }
         .tonearm-assembly {
           top: 8px;
           right: 6px;
-          width: 92px;
-          height: 192px;
-          transform-origin: 64px 28px;
+          width: 98px;
+          height: 205px;
+          transform-origin: 68px 30px;
         }
+        .gatefold, .song-group {
+          margin-inline: .75rem;
+        }
+      }
+
+      @media (max-width: 620px) {
+        .brand-caption { display: none; }
+        .edition-tag { font-size: .58rem; }
       }
       @media (max-width: 420px) {
         .shell { width: min(100% - 1.2rem, 1020px); }
+        #gift.shell { width: 100%; padding-inline: 0; }
         .topbar-inner { min-height: 68px; }
         .answer-row { flex-direction: column; }
         .answer-row .button { width: 100%; }
@@ -592,9 +552,12 @@
         <div class="gift-layout">
           <section class="turntable" aria-labelledby="turntable-title">
             <div class="turntable-info">
-              <div>
-                <p class="eyebrow">Lado A · Lado B</p>
-                <h3 id="turntable-title">El tocadiscos interactivo</h3>
+              <div class="turntable-head-row">
+                <div>
+                  <p class="eyebrow" id="current-side-eyebrow" style="margin-bottom:.2rem;">Cara A · Pistas 01–06</p>
+                  <h3 id="turntable-title">El tocadiscos interactivo</h3>
+                </div>
+                <button class="button button-side" id="flip-side-button" type="button">Voltear a Lado B</button>
               </div>
               <p>Toca el brazo para bajar la aguja al vinilo, arrástrala por los surcos para adelantar o gira el disco.</p>
               <div class="now-playing" aria-live="polite">
@@ -618,15 +581,12 @@
             </div>
 
             <div class="platter-deck" id="platter-deck">
+              <div class="side-swap-banner" id="side-swap-banner" aria-live="polite">CAMBIANDO A LADO B</div>
               <div class="platter-rim">
                 <div class="vinyl" id="vinyl-disc" role="img" aria-label="Vinilo negro con salpicaduras rojas estilo Clancy y sello 24-11">
-                  <div class="vinyl-label">
-                    <span class="label-side">A</span>
-                    <span class="label-main"><b>| - /</b><small>24-11</small></span>
-                  </div>
+                  <canvas id="vinyl-canvas" width="560" height="560"></canvas>
                 </div>
                 <div class="vinyl-sheen" aria-hidden="true"></div>
-                <div class="spindle" aria-hidden="true"></div>
                 <div class="stylus-spark" id="stylus-spark" aria-hidden="true"></div>
               </div>
 
@@ -649,11 +609,6 @@
                 <polygon points="27,225 33,229 25,239 21,236" fill="#ef574d"/>
                 <circle cx="22.5" cy="238" r="2" fill="#f0c66c"/>
               </svg>
-            </div>
-
-            <div class="turntable-tracks">
-              <h4>Pistas de Clancy (13 canciones y sus mensajes)</h4>
-              <div class="track-list" id="track-list" aria-label="Seleccionar pista"></div>
             </div>
           </section>
 
@@ -692,19 +647,19 @@
       };
 
       const clancySongs = [
-        ["Overcompensate", "CARA A", "audio/1.mp3", "Bienvenida a Clancy. Volvemos más fuertes; gracias por dejarme entrar en tu mundo y empezar esta historia juntos."],
-        ["Next Semester", "CARA A", "audio/2.mp3", "No importa lo difícil que haya sido el camino antes de encontrarnos: siempre hay un nuevo comienzo, y me hace inmensamente feliz caminar este contigo."],
-        ["Backslide", "CARA A", "audio/3.mp3", "En los días en que sientas que la marea sube o que las dudas regresan, recuerda que aquí estoy para sostenerte."],
-        ["Midwest Indigo", "CARA A", "audio/4.mp3", "Incluso en los días más fríos, tu risa tiene el poder de iluminarlo todo. Contigo cualquier lugar se siente como hogar."],
-        ["Routines in the Night", "CARA A", "audio/5.mp3", "Para esas noches largas en las que los pensamientos no se detienen: mi voz y mi abrazo siempre serán tu refugio hasta que amanezca."],
-        ["Vignette", "CARA A", "audio/6.mp3", "Cada recuerdo contigo es como una fotografía guardada bajo llave en mi mente. Desde el 28 de marzo hasta hoy, eres mi historia favorita."],
-        ["The Craving (Jenna's Version)", "CARA B", "audio/7.mp3", "La canción más dulce del álbum es para ti. Quererte se siente honesto, sencillo y verdadero."],
-        ["Lavish", "CARA B", "audio/8.mp3", "Te mereces lo mejor del mundo, celebrar a lo grande tu cumpleaños y sonreír sin preocupaciones."],
-        ["Navigating", "CARA B", "audio/9.mp3", "Aunque a veces sintamos que navegamos a ciegas entre la tormenta, mientras tenga tu mano nunca estaremos perdidos."],
-        ["Snap Back", "CARA B", "audio/10.mp3", "Sanar no es una línea recta, tiene altos y bajos; admiro con toda mi alma tu valentía para seguir levantándote."],
-        ["Oldies Station", "CARA B", "audio/11.mp3", "Quiero llegar contigo a viejitos, escuchar nuestras canciones de siempre y ver todo lo que superamos juntos."],
-        ["At the Risk of Feeling Dumb", "CARA B", "audio/12.mp3", "Nunca dudes en buscarme, hablarme o pedir ayuda cuando el día se ponga gris. Siempre voy a estar ahí para ti."],
-        ["Paladin Strait", "CARA B", "audio/13.mp3", "Cruzaría cualquier océano y escalaría cualquier muro por verte en paz. Feliz cumpleaños, mi Bandito favorita."]
+        ["Overcompensate", "A", "audio/1.mp3", "Bienvenida a Clancy. Volvemos más fuertes; gracias por dejarme entrar en tu mundo y empezar esta historia juntos."],
+        ["Next Semester", "A", "audio/2.mp3", "No importa lo difícil que haya sido el camino antes de encontrarnos: siempre hay un nuevo comienzo, y me hace inmensamente feliz caminar este contigo."],
+        ["Backslide", "A", "audio/3.mp3", "En los días en que sientas que la marea sube o que las dudas regresan, recuerda que aquí estoy para sostenerte."],
+        ["Midwest Indigo", "A", "audio/4.mp3", "Incluso en los días más fríos, tu risa tiene el poder de iluminarlo todo. Contigo cualquier lugar se siente como hogar."],
+        ["Routines in the Night", "A", "audio/5.mp3", "Para esas noches largas en las que los pensamientos no se detienen: mi voz y mi abrazo siempre serán tu refugio hasta que amanezca."],
+        ["Vignette", "A", "audio/6.mp3", "Cada recuerdo contigo es como una fotografía guardada bajo llave en mi mente. Desde el 28 de marzo hasta hoy, eres mi historia favorita."],
+        ["The Craving (Jenna's Version)", "B", "audio/7.mp3", "La canción más dulce del álbum es para ti. Quererte se siente honesto, sencillo y verdadero."],
+        ["Lavish", "B", "audio/8.mp3", "Te mereces lo mejor del mundo, celebrar a lo grande tu cumpleaños y sonreír sin preocupaciones."],
+        ["Navigating", "B", "audio/9.mp3", "Aunque a veces sintamos que navegamos a ciegas entre la tormenta, mientras tenga tu mano nunca estaremos perdidos."],
+        ["Snap Back", "B", "audio/10.mp3", "Sanar no es una línea recta, tiene altos y bajos; admiro con toda mi alma tu valentía para seguir levantándote."],
+        ["Oldies Station", "B", "audio/11.mp3", "Quiero llegar contigo a viejitos, escuchar nuestras canciones de siempre y ver todo lo que superamos juntos."],
+        ["At the Risk of Feeling Dumb", "B", "audio/12.mp3", "Nunca dudes en buscarme, hablarme o pedir ayuda cuando el día se ponga gris. Siempre voy a estar ahí para ti."],
+        ["Paladin Strait", "B", "audio/13.mp3", "Cruzaría cualquier océano y escalaría cualquier muro por verte en paz. Feliz cumpleaños, mi Bandito favorita."]
       ];
 
       const dedicatedSongs = [
@@ -716,6 +671,178 @@
         ["Patadas de Ahogado", "LATIN MAFIA & Humbe", "RESPIRAR", "Cuando todo afuera pesaba demasiado y sentías que faltaba el aire, encontrarnos fue volver a respirar en paz."],
         ["Fallingforyou", "The 1975", "PAZ", "Caer por ti no fue un accidente: fue encontrar por fin el lugar donde mi alma quería quedarse a vivir."]
       ];
+
+      let activeDiscSide = "A";
+
+      /* === DIBUJO DEL VINILO IDÉNTICO A LA CAPTURA (CON 24-11 Y LADO A / B) === */
+      function renderClancyVinylCanvas(sideLetter = activeDiscSide) {
+        const canvas = document.getElementById("vinyl-canvas");
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d");
+        const size = canvas.width;
+        const cx = size / 2;
+        const cy = size / 2;
+        const outerR = size * 0.488;
+        const labelOuterR = size * 0.172;
+        const labelInnerR = size * 0.153;
+
+        ctx.clearRect(0, 0, size, size);
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(cx, cy, outerR, 0, Math.PI * 2);
+        ctx.fillStyle = "#0b0a0a";
+        ctx.fill();
+        ctx.clip();
+
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.032)";
+        ctx.lineWidth = 1;
+        for (let r = labelOuterR + 8; r < outerR - 6; r += 3.2) {
+          ctx.beginPath();
+          ctx.arc(cx, cy, r, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+
+        let seed = sideLetter === "A" ? 24112026 : 11242026;
+        function rand() {
+          seed = (seed * 1664525 + 1013904223) >>> 0;
+          return seed / 4294967296;
+        }
+
+        const rayCount = 135;
+        for (let i = 0; i < rayCount; i++) {
+          const baseAngle = (i / rayCount) * Math.PI * 2 + (rand() - 0.5) * 0.045;
+          const startR = labelOuterR + 2 + rand() * 14;
+          const length = 35 + Math.pow(rand(), 0.72) * (outerR - labelOuterR - 42);
+          const endR = Math.min(outerR - 6, startR + length);
+          const spreadAngle = (0.012 + Math.pow(rand(), 1.6) * 0.052) * (rand() > 0.2 ? 1 : 0.55);
+
+          const grad = ctx.createRadialGradient(cx, cy, startR, cx, cy, endR);
+          const bright = rand() > 0.35;
+          grad.addColorStop(0, bright ? "rgba(232, 61, 46, 0.96)" : "rgba(194, 42, 32, 0.88)");
+          grad.addColorStop(0.55, bright ? "rgba(214, 48, 36, 0.84)" : "rgba(168, 34, 26, 0.72)");
+          grad.addColorStop(0.88, "rgba(195, 42, 32, 0.36)");
+          grad.addColorStop(1, "rgba(195, 42, 32, 0)");
+
+          ctx.beginPath();
+          const steps = 10;
+          for (let s = 0; s <= steps; s++) {
+            const t = s / steps;
+            const r = startR + (endR - startR) * t;
+            const taper = Math.sin(t * Math.PI * 0.82 + 0.18);
+            const jitter = (rand() - 0.5) * 0.014;
+            const a1 = baseAngle - spreadAngle * taper + jitter;
+            const x1 = cx + Math.cos(a1) * r;
+            const y1 = cy + Math.sin(a1) * r;
+            if (s === 0) ctx.moveTo(x1, y1);
+            else ctx.lineTo(x1, y1);
+          }
+          for (let s = steps; s >= 0; s--) {
+            const t = s / steps;
+            const r = startR + (endR - startR) * t;
+            const taper = Math.sin(t * Math.PI * 0.82 + 0.18);
+            const jitter = (rand() - 0.5) * 0.014;
+            const a2 = baseAngle + spreadAngle * taper + jitter;
+            const x2 = cx + Math.cos(a2) * r;
+            const y2 = cy + Math.sin(a2) * r;
+            ctx.lineTo(x2, y2);
+          }
+          ctx.closePath();
+          ctx.fillStyle = grad;
+          ctx.fill();
+        }
+
+        for (let d = 0; d < 65; d++) {
+          const angle = rand() * Math.PI * 2;
+          const dist = labelOuterR + 18 + rand() * (outerR - labelOuterR - 30);
+          const rx = 2 + rand() * 5;
+          const ry = 1.2 + rand() * 2.5;
+          ctx.save();
+          ctx.translate(cx + Math.cos(angle) * dist, cy + Math.sin(angle) * dist);
+          ctx.rotate(angle);
+          ctx.beginPath();
+          ctx.ellipse(0, 0, rx, ry, 0, 0, Math.PI * 2);
+          ctx.fillStyle = rand() > 0.4 ? "rgba(229, 58, 44, 0.85)" : "rgba(182, 38, 28, 0.72)";
+          ctx.fill();
+          ctx.restore();
+        }
+
+        const edgeShade = ctx.createRadialGradient(cx, cy, outerR * 0.72, cx, cy, outerR);
+        edgeShade.addColorStop(0, "rgba(11, 10, 10, 0)");
+        edgeShade.addColorStop(0.85, "rgba(11, 10, 10, 0.45)");
+        edgeShade.addColorStop(1, "rgba(11, 10, 10, 0.92)");
+        ctx.fillStyle = edgeShade;
+        ctx.beginPath();
+        ctx.arc(cx, cy, outerR, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(cx, cy, labelOuterR, 0, Math.PI * 2);
+        ctx.fillStyle = "#b5352b";
+        ctx.fill();
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(cx, cy, labelInnerR, 0, Math.PI * 2);
+        ctx.fillStyle = "#d9463c";
+        ctx.fill();
+        ctx.clip();
+
+        ctx.fillStyle = "#ba392f";
+        ctx.fillRect(cx - labelInnerR, cy - labelInnerR, labelInnerR * 0.86, labelInnerR * 2);
+
+        ctx.strokeStyle = "rgba(20, 11, 10, 0.45)";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(cx - labelInnerR, cy);
+        ctx.lineTo(cx + labelInnerR, cy);
+        ctx.stroke();
+
+        ctx.fillStyle = "#180c0b";
+        ctx.font = "900 22px monospace";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(sideLetter, cx - labelInnerR * 0.56, cy + 1);
+
+        ctx.strokeStyle = "#180c0b";
+        ctx.lineCap = "butt";
+        ctx.lineWidth = 7.5;
+        ctx.beginPath();
+        ctx.moveTo(cx - labelInnerR * 0.06, cy - 26);
+        ctx.lineTo(cx - labelInnerR * 0.06, cy + 24);
+        ctx.stroke();
+
+        ctx.lineWidth = 5;
+        ctx.beginPath();
+        ctx.moveTo(cx + labelInnerR * 0.14, cy);
+        ctx.lineTo(cx + labelInnerR * 0.34, cy);
+        ctx.stroke();
+
+        ctx.lineWidth = 7.5;
+        ctx.beginPath();
+        ctx.moveTo(cx + labelInnerR * 0.72, cy - 22);
+        ctx.lineTo(cx + labelInnerR * 0.46, cy + 22);
+        ctx.stroke();
+
+        ctx.fillStyle = "#140a09";
+        ctx.fillRect(cx - 24, cy + labelInnerR * 0.44, 48, 15);
+        ctx.fillStyle = "#ffe3b0";
+        ctx.font = "700 10px monospace";
+        ctx.fillText("24-11", cx, cy + labelInnerR * 0.44 + 8);
+
+        ctx.restore();
+
+        ctx.beginPath();
+        ctx.arc(cx, cy, size * 0.017, 0, Math.PI * 2);
+        ctx.fillStyle = "#161412";
+        ctx.fill();
+        ctx.strokeStyle = "#2b2622";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.restore();
+      }
+      renderClancyVinylCanvas("A");
 
       function normalize(value) {
         return value.toLocaleLowerCase("es").normalize("NFD")
@@ -772,6 +899,7 @@
         gift.hidden = false;
         gift.scrollIntoView({ behavior: "smooth", block: "start" });
         document.getElementById("gift-title").focus({ preventScroll: true });
+        renderClancyVinylCanvas(activeDiscSide);
         updateStylusSpark();
       });
 
@@ -784,39 +912,6 @@
         document.getElementById("gatefold-caption").textContent = isOpen
           ? "Haz clic para desplegar la funda y leer tu carta"
           : "Funda desplegada · carta para ti";
-      });
-
-      let currentTrackIndex = 0;
-      const trackList = document.getElementById("track-list");
-      const trackButtons = [];
-      clancySongs.forEach(([title, side, , note], index) => {
-        const button = document.createElement("button");
-        button.className = "track-button";
-        button.type = "button";
-        button.setAttribute("aria-pressed", String(index === currentTrackIndex));
-
-        const number = document.createElement("span");
-        number.className = "track-number";
-        number.textContent = String(index + 1).padStart(2, "0");
-
-        const details = document.createElement("span");
-        const titleEl = document.createElement("span");
-        titleEl.className = "track-title";
-        titleEl.textContent = title;
-
-        const noteEl = document.createElement("span");
-        noteEl.className = "track-note";
-        noteEl.textContent = note;
-
-        const sideLabel = document.createElement("span");
-        sideLabel.className = "track-side";
-        sideLabel.textContent = side;
-
-        details.append(titleEl, noteEl, sideLabel);
-        button.append(number, details);
-        button.addEventListener("click", () => selectTrack(index, true));
-        trackList.append(button);
-        trackButtons.push(button);
       });
 
       const dedicationList = document.getElementById("dedication-list");
@@ -834,13 +929,16 @@
         dedicationList.append(card);
       });
 
-      /* === TOCADISCOS CON AGUJA REAL Y AUDIO MP3 === */
+      /* === TOCADISCOS CON AGUJA REAL, CAMBIO DE LADO A/B Y AUDIO MP3 === */
       const audio = document.getElementById("audio-player");
       const vinyl = document.getElementById("vinyl-disc");
       const tonearm = document.getElementById("tonearm");
       const stylusSpark = document.getElementById("stylus-spark");
       const platterRim = document.querySelector(".platter-rim");
       const playButton = document.getElementById("toggle-play");
+      const flipSideButton = document.getElementById("flip-side-button");
+      const currentSideEyebrow = document.getElementById("current-side-eyebrow");
+      const sideSwapBanner = document.getElementById("side-swap-banner");
       const audioStatus = document.getElementById("audio-status");
       const nowPlayingTitle = document.getElementById("now-playing-title");
       const nowPlayingNote = document.getElementById("now-playing-note");
@@ -854,7 +952,9 @@
       const ARM_INNER = 19;
       let currentArmAngle = ARM_REST;
       let draggingArm = false;
+      let flippingSide = false;
 
+      let currentTrackIndex = 0;
       let vinylAngle = 0;
       let draggingVinyl = false;
       let lastPointerAngle = 0;
@@ -865,6 +965,12 @@
         const m = Math.floor(sec / 60);
         const s = Math.floor(sec % 60);
         return `${m}:${String(s).padStart(2, "0")}`;
+      }
+
+      function updateSideUI(side) {
+        activeDiscSide = side;
+        currentSideEyebrow.textContent = side === "A" ? "Cara A · Pistas 01–06" : "Cara B · Pistas 07–13";
+        flipSideButton.textContent = side === "A" ? "Voltear a Lado B" : "Voltear a Lado A";
       }
 
       function updateStylusSpark() {
@@ -889,35 +995,86 @@
       function setArmAngle(deg) {
         currentArmAngle = deg;
         tonearm.style.transform = `rotate(${deg}deg)`;
-        const onGroove = deg >= ARM_OUTER - 1.5 && !audio.paused;
+        const onGroove = deg >= ARM_OUTER - 1.5 && !audio.paused && !flippingSide;
         stylusSpark.classList.toggle("active", onGroove);
         updateStylusSpark();
       }
 
-      function selectTrack(index, autoplay = false) {
+      function applyTrackData(index) {
         currentTrackIndex = (index + clancySongs.length) % clancySongs.length;
-        const [title, , filePath, note] = clancySongs[currentTrackIndex];
+        const [title, side, filePath, note] = clancySongs[currentTrackIndex];
+        updateSideUI(side);
+        renderClancyVinylCanvas(side);
         nowPlayingTitle.textContent = `${String(currentTrackIndex + 1).padStart(2, "0")} · ${title}`;
         nowPlayingNote.textContent = note;
         audio.src = filePath;
         audioSeekFill.style.width = "0%";
         timeCurrent.textContent = "0:00";
-        trackButtons.forEach((btn, i) => btn.setAttribute("aria-pressed", String(i === currentTrackIndex)));
-        if (autoplay) {
-          startPlayback();
-        } else if (!audio.paused) {
+      }
+
+      function animateSideFlip(targetIndex, autoplay = false) {
+        const [, targetSide] = clancySongs[(targetIndex + clancySongs.length) % clancySongs.length];
+        flippingSide = true;
+        const wasPlaying = !audio.paused;
+        audio.pause();
+        setArmAngle(ARM_REST);
+
+        sideSwapBanner.textContent = `VOLTEANDO DISCO · LADO ${targetSide}`;
+        sideSwapBanner.classList.add("visible");
+        audioStatus.textContent = `Levantando aguja y volteando vinilo a Lado ${targetSide}...`;
+
+        vinyl.style.transition = "transform .32s ease-in, opacity .2s ease";
+        vinyl.style.transform = `rotate(${vinylAngle + 180}deg) scale(.94)`;
+        vinyl.style.opacity = ".45";
+
+        setTimeout(() => {
+          applyTrackData(targetIndex);
+          vinylAngle = (vinylAngle + 180) % 360;
+          vinyl.style.transform = `rotate(${vinylAngle}deg) scale(1)`;
+          vinyl.style.opacity = "1";
+        }, 280);
+
+        setTimeout(() => {
+          vinyl.style.transition = "";
+          sideSwapBanner.classList.remove("visible");
+          flippingSide = false;
+          if (autoplay || wasPlaying) {
+            startPlayback();
+          } else {
+            playButton.setAttribute("aria-pressed", "false");
+            playButton.textContent = "▶ Bajar aguja";
+            audioStatus.textContent = `Lado ${targetSide} listo en el plato. Pulsa «Bajar aguja».`;
+          }
+        }, 560);
+      }
+
+      function selectTrack(index, autoplay = false) {
+        const normalizedIndex = (index + clancySongs.length) % clancySongs.length;
+        const [, nextSide] = clancySongs[normalizedIndex];
+        if (nextSide !== activeDiscSide) {
+          animateSideFlip(normalizedIndex, autoplay);
+          return;
+        }
+        applyTrackData(normalizedIndex);
+        if (autoplay || !audio.paused) {
           startPlayback();
         }
       }
 
+      flipSideButton.addEventListener("click", () => {
+        const targetIndex = activeDiscSide === "A" ? 6 : 0;
+        animateSideFlip(targetIndex, !audio.paused);
+      });
+
       function startPlayback() {
-        if (!audio.src) selectTrack(currentTrackIndex, false);
+        if (flippingSide) return;
+        if (!audio.src) applyTrackData(currentTrackIndex);
         audio.play().then(() => {
           playButton.setAttribute("aria-pressed", "true");
           playButton.textContent = "Ⅱ Levantar aguja";
           const progress = audio.duration ? audio.currentTime / audio.duration : 0;
           setArmAngle(ARM_OUTER + progress * (ARM_INNER - ARM_OUTER));
-          audioStatus.textContent = "Aguja sobre el surco · reproduciendo vinilo.";
+          audioStatus.textContent = `Lado ${activeDiscSide} · aguja sobre el surco.`;
         }).catch(() => {
           audioStatus.textContent = `No se encontró ${clancySongs[currentTrackIndex][2]} en la carpeta audio/.`;
         });
@@ -944,7 +1101,7 @@
       });
 
       audio.addEventListener("timeupdate", () => {
-        if (!audio.duration || draggingArm) return;
+        if (!audio.duration || draggingArm || flippingSide) return;
         const ratio = audio.currentTime / audio.duration;
         audioSeekFill.style.width = `${ratio * 100}%`;
         timeCurrent.textContent = formatTime(audio.currentTime);
@@ -959,7 +1116,7 @@
       });
 
       audioSeek.addEventListener("click", (event) => {
-        if (!audio.duration) return;
+        if (!audio.duration || flippingSide) return;
         const rect = audioSeek.getBoundingClientRect();
         const ratio = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
         audio.currentTime = ratio * audio.duration;
@@ -971,7 +1128,7 @@
         const dt = (now - lastFrameTime) / 1000;
         lastFrameTime = now;
 
-        if (!audio.paused && !draggingVinyl) {
+        if (!audio.paused && !draggingVinyl && !flippingSide) {
           vinylAngle = (vinylAngle + dt * 165) % 360;
           vinyl.style.transform = `rotate(${vinylAngle}deg)`;
         }
@@ -984,6 +1141,7 @@
         return Math.atan2(event.clientY - rect.top - rect.height / 2, event.clientX - rect.left - rect.width / 2) * 180 / Math.PI;
       }
       vinyl.addEventListener("pointerdown", (event) => {
+        if (flippingSide) return;
         draggingVinyl = true;
         lastPointerAngle = pointerAngle(event);
         vinyl.setPointerCapture(event.pointerId);
@@ -1011,6 +1169,7 @@
       }
 
       tonearm.addEventListener("pointerdown", (event) => {
+        if (flippingSide) return;
         draggingArm = true;
         armMoved = false;
         tonearm.classList.add("dragging");
@@ -1237,10 +1396,11 @@
       });
       window.addEventListener("resize", () => {
         resizeGame();
+        renderClancyVinylCanvas(activeDiscSide);
         updateStylusSpark();
       });
 
-      selectTrack(0, false);
+      applyTrackData(0);
     </script>
   </body>
 </html>
