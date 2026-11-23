@@ -1,6 +1,6 @@
 # Clancy — edición de cumpleaños
 
-Sitio estático en español hecho como regalo: acertijos personales, una carta desplegable, un tocadiscos interactivo y un minijuego arcade. El tocadiscos genera una señal sintética original directamente en el navegador; no se conecta a Spotify o YouTube Music ni aloja las grabaciones comerciales del álbum.
+Sitio estático en español hecho como regalo: acertijos personales, una carta desplegable, un tocadiscos interactivo y un minijuego arcade. El tocadiscos reproduce los 13 archivos MP3 de `audio/` desde el navegador; no se conecta a Spotify o YouTube Music.
 
 ## Publicar en GitHub Pages
 
@@ -12,4 +12,13 @@ No hay proceso de compilación ni dependencias: `index.html` es el sitio y puede
 
 ## Personalizar
 
-Edita la carta, las respuestas de las tres pistas y las listas `clancySongs` / `dedicatedSongs` dentro de `index.html`. Las pistas solo son una interacción lúdica del lado del navegador, no un control de acceso. No publiques canciones comerciales, letras ni archivos LRC; cualquier audio que se añada debe ser una grabación propia o contar con licencia para redistribución pública.
+Edita la carta, las respuestas de las tres pistas y las listas `clancySongs` / `dedicatedSongs` dentro de `index.html`. Las pistas solo son una interacción lúdica del lado del navegador; no brindan privacidad ni autenticación real. El repositorio incluye 13 archivos MP3 referenciados por el sitio. Antes de publicar, confirma que tienes derecho a redistribuirlos: usa solo audio propio o con licencia para redistribución pública. No se presupone que los archivos actuales tengan licencia.
+
+## QR del sitio
+
+Arte listo para compartir o imprimir, con alto contraste y zona de silencio:
+
+- [QR Clancy en SVG vectorial](qr/clancy-cumpleanos.svg)
+- [QR Clancy en PNG de alta resolución](qr/clancy-cumpleanos.png)
+
+Ambos apuntan exactamente a <https://jorgealbertt.github.io/clancy-cumpleanos/>. Para regenerarlos sin dependencias de ejecución, ejecuta `python tools/generate_qr.py`.
